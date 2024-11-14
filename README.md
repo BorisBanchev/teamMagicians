@@ -1,6 +1,6 @@
 ## TeamMagician
 
-Team Burndown chart: https://docs.google.com/spreadsheets/d/1hln77KzzvKvjkq34VGczo-jBWrRoPOLknGqwouO3ELE/edit?usp=sharing
+Team Product and Sprint Backlog: https://docs.google.com/spreadsheets/d/1M6PnnOBQbmud6kSEFh_Pxoa-kk0jIUnGVv0p_7QD7ms/edit?usp=sharing
 
 # käynnistysohjeet
 
