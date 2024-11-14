@@ -1,31 +1,44 @@
-## TeamMagician
+# TeamMagician
 
-Team Product and Sprint Backlog: https://docs.google.com/spreadsheets/d/1M6PnnOBQbmud6kSEFh_Pxoa-kk0jIUnGVv0p_7QD7ms/edit?usp=sharing
+[Team Product and Sprint Backlog](https://docs.google.com/spreadsheets/d/1M6PnnOBQbmud6kSEFh_Pxoa-kk0jIUnGVv0p_7QD7ms/edit?usp=sharing)
 
-# käynnistysohjeet
+## Käynnistysohjeet
 
 Kloonaa repositorio omalle koneellesi
 
-`git clone https://github.com/BorisBanchev/teamMagicians.git`
+```shell
+git clone https://github.com/BorisBanchev/teamMagicians.git
+```
 
 Siirry oikeaan hakemistoon, johon repositorio kloonattiin
 
-`cd teamMagicians`
+```shell
+cd teamMagicians
+```
 
 Alusta projekti ja asenna riippuvuudet juurihakemistossa:
-`poetry install`
 
-Luo sovellukseen PostgreSQL-tietokanta esim. käyttämällä (https://aiven.io)
+```shell
+poetry install
+```
 
-Luo .env ympäristö tiedosto seuraavilla muuttujilla:
+Luo .env -tiedosto seuraavilla muuttujilla:
 
-`DATABASE_URL=<tietokannan osoite>`  
-`SECRET_KEY=<salainen-avain>`  
-`TEST_ENV=true`
+```env
+DATABASE_URL=<tietokannan osoite>
+SECRET_KEY=<salainen-avain>
+TEST_ENV=true
+```
 
 Käynnistä virtuaaliympäristö:
-`poetry shell`
 
-Luo sovelluksen tietokantataulu ja käynnistä sovellus:
-`python3 src/db_helper.py`
-`python3 src/index.py`
+```shell
+poetry shell
+```
+
+Luo sovelluksen tietokantataulu (ensimmäisellä käynnistyksellä) ja käynnistä sovellus:
+
+```shell
+python3 src/db_helper.py
+python3 src/index.py
+```
