@@ -1,35 +1,44 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="/static/styles.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/styles.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <form action="/add_reference" method="POST" onsubmit="return check(this)">
-
-<div class="frame">
-  <div class="info">
-    <h2>Add reference:</h2>
+  <div class="frame">
+    <div class="info">
+      <h2>Add reference:</h2>
+    </div>
+    <div>
+      <div class="row">
+        <label>Reference type:</label
+        ><input type="text" name="reference_type" value="Article" readonly />
+      </div>
+      <div class="row">
+        <label>Author:</label><input type="text" name="author" required />
+      </div>
+      <div class="row">
+        <label>Title:</label><input type="text" name="title" required />
+      </div>
+      <div class="row">
+        <label>Journal:</label><input type="text" name="journal" required />
+      </div>
+      <div class="row">
+        <label>Year:</label
+        ><input type="number" name="year" step="1" required />
+      </div>
+    </div>
+    <div class="footer">
+      <input type="submit" value="Save reference" />
+      <button type="button" onclick="window.location.href='/'">Cancel</button>
+    </div>
+    {{message}}
   </div>
-  <div>
-    <div class=row><label>Reference type:</label><input type="text" name="reference_type" value="Article" readonly></div>
-    <div class=row><label>Reference id:</label><input type="text" name="reference_id" required></div>
-    <div class=row><label>Author:</label><input type="text" name="author" required></div>
-    <div class=row><label>Title:</label><input type="text" name="title" required></div>
-    <div class=row><label>Journal:</label><input type="text" name="journal" required></div>
-    <div class=row><label>Year:</label><input type="number" name="year" step=1 required></div>
-
-  </div>
-  <div class="footer">
-    <input type="submit" value="Save reference">
-    <button type="button" onclick="window.location.href='/'">Cancel</button>
-  </div>
-</div>
 </form>
 
 <script>
-    function check(form) {
-        if (form.title.value.length > 100) {
-            alert("Title is too long");
-            return false;
-        }
+  function check(form) {
+    if (form.title.value.length > 100) {
+      alert("Title is too long");
+      return false;
     }
-    </script>
-
+  }
+</script>
