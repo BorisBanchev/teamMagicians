@@ -1,6 +1,8 @@
 from flask import redirect, render_template, request, jsonify, flash
 from config import app, test_env
-from entities.add_reference import add__reference
+from db_helper import reset_db
+from repositories.reference_repository import create_reference
+from util import validate_reference
 
 @app.route("/")
 def index():
@@ -16,6 +18,19 @@ def add_reference():
         author = request.form["author"]
         title = request.form["title"]
         journal = request.form["journal"]
-        year = request.form["year"]
-        message = add__reference(author, title, journal, year)
-        return render_template("/add_reference.html",message = message)
+        year = int(request.form["year"])
+        try:
+            validate_reference(author, title, journal, year)
+            create_reference(author, title, journal, year)
+            return redirect("/")
+        except Exception as error:
+            flash(str(error))
+            return redirect("/add_reference")
+
+
+# testausta varten oleva reitti
+if test_env:
+    @app.route("/reset_db")
+    def reset_database():
+        reset_db()
+        return jsonify({ 'message': "db reset" })

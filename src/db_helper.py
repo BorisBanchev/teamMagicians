@@ -20,6 +20,12 @@ def initialize_database():
         db.session.commit()
         print("Table created successfully")
 
+def reset_db():
+  print(f"Clearing contents from table {table}")
+  sql = text(f"DELETE FROM {table}")
+  db.session.execute(sql)
+  db.session.commit()
+
 if __name__ == "__main__":
     with app.app_context():
       initialize_database()
