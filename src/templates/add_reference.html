@@ -2,6 +2,14 @@
 <link rel="stylesheet" href="/static/styles.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+{% with messages = get_flashed_messages() %} {% if messages %}
+<ul>
+  {% for message in messages %}
+  <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %} {% endwith %}
+
 <form action="/add_reference" method="POST" onsubmit="return check(this)">
   <div class="frame">
     <div class="info">

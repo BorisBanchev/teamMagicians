@@ -18,9 +18,12 @@ class TestReferenceValidation(unittest.TestCase):
     def test_valid_title_length_does_not_raise_error(self):
         validate_reference("test_author", "test_title", "test_journal",2000)
     
-    def test_too_long_title_length_raises_error(self):
+    def test_too_long_or_short_title_length_raises_error(self):
         with self.assertRaises(UserInputError):
             validate_reference("test_author","test_title" * 100, "test_journal",2000)
+        
+        with self.assertRaises(UserInputError):
+            validate_reference("test_author","", "test_journal",2000)
     
     def test_valid_journal_length_does_not_raise_error(self):
         validate_reference("test_author", "test_title", "test_journal",2000)
@@ -42,3 +45,5 @@ class TestReferenceValidation(unittest.TestCase):
         
         with self.assertRaises(UserInputError):
             validate_reference("test_author","test_title", "test_journal",2026)
+
+    
