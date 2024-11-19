@@ -21,21 +21,21 @@
                         <th>Title</th>
                         <th>Journal</th>
                         <th>Year</th>
-                        <th>Actions</th>
+                        <!-- <th>Actions</th> -->
                     </tr>
                 </thead>
                 <tbody>
 
 
                 {%for reference in references%}
-                <tr>
+                <tr class="reference_row">
                     <td>{{reference.author}}</td>
                     <td>{{reference.title}}</td>
                     <td>{{reference.journal}}</td>
                     <td>{{reference.year}}</td>
 
                     <td>
-                    <form action="/modify_reference/{{reference.id}}"
+                    <!-- <form action="/modify_reference/{{reference.id}}"
                         method="get" style= "display: inline;">
                         <button type="submit"> Modify</button>
                     </form>
@@ -43,7 +43,7 @@
                     <form action= "/delete_reference/{{reference.id}}"
                         method="post" style ="display: inline;">
                         <button type="submit">Delete</button>
-                    </form>
+                    </form> -->
                 </td>
             </tr>
             {%endfor%}
