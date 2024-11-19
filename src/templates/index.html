@@ -1,18 +1,21 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block title %}Reference App{% endblock %}
+{% block head %}
+{{ super() }}
 <link rel="stylesheet" href="/static/styles.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+{% endblock %}
+{% block body %}
 <div class="frame">
-    <div class= "info">
+    <div class="info">
         <h2>References</h2>
     </div>
 
     <div>
-    {% if references|length > 0 %}
+        {% if references|length > 0 %}
         <div class="row">
-          <p>Added references:</p>
+            <p>Added references:</p>
         </div>
-    
+
         <div class="row">
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
@@ -27,15 +30,15 @@
                 <tbody>
 
 
-                {%for reference in references%}
-                <tr class="reference_row">
-                    <td>{{reference.author}}</td>
-                    <td>{{reference.title}}</td>
-                    <td>{{reference.journal}}</td>
-                    <td>{{reference.year}}</td>
+                    {%for reference in references%}
+                    <tr class="reference_row">
+                        <td>{{reference.author}}</td>
+                        <td>{{reference.title}}</td>
+                        <td>{{reference.journal}}</td>
+                        <td>{{reference.year}}</td>
 
-                    <td>
-                    <!-- <form action="/modify_reference/{{reference.id}}"
+                        <td>
+                            <!-- <form action="/modify_reference/{{reference.id}}"
                         method="get" style= "display: inline;">
                         <button type="submit"> Modify</button>
                     </form>
@@ -44,21 +47,23 @@
                         method="post" style ="display: inline;">
                         <button type="submit">Delete</button>
                     </form> -->
-                </td>
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
-</div>
-    
-{% else %}
-<div class="row">
-    <label>No references. Click "Add Reference" to add.</label>
-</div>
-{% endif %}
-</div>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+
+        {% else %}
+        <div class="row">
+            <label>No references. Click "Add Reference" to add.</label>
+        </div>
+        {% endif %}
+    </div>
 
 
-<div class= "footer">
-  <a href="/add_reference" class="button">Add Reference</a>
+    <div class="footer">
+        <a href="/add_reference" class="button">Add Reference</a>
+    </div>
 </div>
+{% endblock %}
