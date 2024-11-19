@@ -1,12 +1,13 @@
 from flask import redirect, render_template, request, jsonify, flash
 from config import app, test_env
 from db_helper import reset_db
-from repositories.reference_repository import create_reference
+from repositories.reference_repository import create_reference, get_references
 from util import validate_reference
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    references = get_references()
+    return render_template("index.html", references=references)
 
 
 @app.route("/add_reference", methods = ["POST", "GET"])
