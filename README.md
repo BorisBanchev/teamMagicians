@@ -1,5 +1,7 @@
 # TeamMagician
 
+[![CI badge](https://github.com/BorisBanchev/teamMagicians/workflows/CI/badge.svg)](https://github.com/BorisBanchev/teamMagicians/actions)
+
 [Team Product and Sprint Backlog](https://docs.google.com/spreadsheets/d/1M6PnnOBQbmud6kSEFh_Pxoa-kk0jIUnGVv0p_7QD7ms/edit?usp=sharing)
 
 ## Käynnistysohjeet
