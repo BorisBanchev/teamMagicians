@@ -13,12 +13,12 @@ At start there are no references
 After adding a reference, there is one
     Go To  ${HOME_URL}
     Click Link  //a[contains(text(), "Add Reference")]
-    Select From List By Label  type  Article
+    Select From List By Label  reference_type  Article
     Input Text  author  Example1
     Input Text  title  Example2
     Input Text  journal  Example3
     Input Text  year  2000
-    Input Text  reference_keyword  article 
+    Input Text  keyword  article 
     Click Button  Save Reference
     Page Should Contain  Example1
     Page Should Contain  Example2
@@ -28,20 +28,20 @@ After adding a reference, there is one
 After adding two references there is two references
     Go To  ${HOME_URL}
     Click Link  //a[contains(text(), "Add Reference")]
-    Select From List By Label  type  Article
+    Select From List By Label  reference_type  Article
     Input Text  author  Example1
     Input Text  title  Example2
     Input Text  journal  Example3
     Input Text  year  2000
-    Input Text  reference_keyword  article 
+    Input Text  keyword  article 
     Click Button  Save Reference
     Click Link  //a[contains(text(), "Add Reference")]
-    Select From List By Label  type  Article
+    Select From List By Label  reference_type  Article
     Input Text  author  Example4
     Input Text  title  Example5
     Input Text  journal  Example6
     Input Text  year  2001
-    Input Text  reference_keyword  article2
+    Input Text  keyword  article2
     Click Button  Save Reference
     Page Should Contain  Example1
     Page Should Contain  Example2
@@ -55,12 +55,12 @@ After adding two references there is two references
 After adding invalid reference there is no references
     Go To  ${HOME_URL}
     Click Link  //a[contains(text(), "Add Reference")]
-    Select From List By Label  type  Article
+    Select From List By Label  reference_type  Article
     Input Text  author  Example1
     Input Text  title  Example2
     Input Text  journal  Example3
     Input Text  year  2026
-    Input Text  reference_keyword  article 
+    Input Text  keyword  article 
     Click Button  Save Reference
     Page Should Contain  smaller than 2026
     Click Button  Cancel
