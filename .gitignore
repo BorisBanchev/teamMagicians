@@ -7,3 +7,4 @@ report.html
 htmlcov
 interactive_console_output.xml
 selenium*.png
+.DS_STORE
