@@ -16,3 +16,8 @@ def create_reference(fields):
     sql = text(f"INSERT INTO reference_list ({columns}) VALUES ({values})")
     db.session.execute(sql, fields) 
     db.session.commit()
+
+def delete_reference(id):
+    sql = text("DELETE FROM reference_list WHERE id= :id")
+    db.session.execute(sql, {"keyword":id})
+    db.session.commit()
