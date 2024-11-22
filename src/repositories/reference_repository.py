@@ -19,5 +19,5 @@ def create_reference(fields):
 
 def delete_reference(id):
     sql = text("DELETE FROM reference_list WHERE id= :id")
-    db.session.execute(sql, {"keyword":id})
+    db.session.execute(sql, {"id":id})
     db.session.commit()
