@@ -17,7 +17,7 @@ if messages %}
     </div>
     <div class="row">
       <label for="type">Reference Type:</label>
-      <select id="type" name="type" onchange="updateFormFields()" required>
+      <select id="type" name="reference_type" onchange="updateFormFields()" required>
         <option value="" disabled selected>Select</option>
         <option value="article">Article</option>
         <option value="book">Book</option>
@@ -191,7 +191,7 @@ if messages %}
     formFieldsDiv.innerHTML = "";
 
     // mandatory fields
-    const mandatory = ["reference_keyword", ...fields.mandatory];
+    const mandatory = ["keyword", ...fields.mandatory];
     const mandatoryDiv = document.createElement("div");
     mandatoryDiv.classList.add("field_group");
     mandatoryDiv.classList.add("required");
