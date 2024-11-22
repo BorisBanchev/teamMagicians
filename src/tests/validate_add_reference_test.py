@@ -9,7 +9,7 @@ class TestReferenceValidation(unittest.TestCase):
         validate_reference("article", {"author":"test", "title":"test", "journal":"test", "year":"2001"})
 
     def test_too_short_or_empty_author_length_raises_error(self):
-        with self.assertRaises(UserInputError):
+        with self.assertRaises(ValueError):
             validate_reference("article", {"author":"", "title":"test", "journal":"test", "year":"2001"})
         
         with self.assertRaises(UserInputError):
