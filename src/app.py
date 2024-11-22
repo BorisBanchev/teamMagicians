@@ -16,13 +16,14 @@ def add_reference():
         return render_template("add_reference.html")
     
     if request.method == "POST":
-        author = request.form["author"]
-        title = request.form["title"]
-        journal = request.form["journal"]
-        year = int(request.form["year"])
+        all_fields = request.form.to_dict()
+
+        # Retrieve all fields submitted by the user
+
+
         try:
-            validate_reference(author, title, journal, year)
-            create_reference(author, title, journal, year)
+            validate_reference(all_fields["reference_type"], all_fields)  # Dynamic validation
+            create_reference(all_fields)
             return redirect("/")
         except Exception as error:
             flash(str(error))
