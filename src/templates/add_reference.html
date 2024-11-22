@@ -1,11 +1,8 @@
-{% extends "layout.html" %}
-{% block title %}Add Reference{% endblock %}
-{% block head %}
-{{ super() }}
+{% extends "layout.html" %} {% block title %}Add Reference{% endblock %} {%
+block head %} {{ super() }}
 <link rel="stylesheet" href="/static/styles.css" />
-{% endblock %}
-{% block body %}
-{% with messages = get_flashed_messages() %} {% if messages %}
+{% endblock %} {% block body %} {% with messages = get_flashed_messages() %} {%
+if messages %}
 <ul>
   {% for message in messages %}
   <li>{{ message }}</li>
@@ -13,30 +10,48 @@
 </ul>
 {% endif %} {% endwith %}
 
-<form action="/add_reference" method="POST" onsubmit="return check(this)">
+<form
+  id="reference-form"
+  action="/add_reference"
+  method="POST"
+  onsubmit="return check(this)"
+>
   <div class="frame">
     <div class="info">
-      <h2>Add reference:</h2>
+      <h2>Add Reference:</h2>
     </div>
-    <div>
-      <div class="row">
-        <label>Reference type:</label><input type="text" name="reference_type" value="Article" readonly />
-      </div>
-      <div class="row">
-        <label>Author:</label><input type="text" name="author" required />
-      </div>
-      <div class="row">
-        <label>Title:</label><input type="text" name="title" required />
-      </div>
-      <div class="row">
-        <label>Journal:</label><input type="text" name="journal" required />
-      </div>
-      <div class="row">
-        <label>Year:</label><input type="number" name="year" step="1" required />
-      </div>
+    <div class="row">
+      <label for="type">Reference Type:</label>
+      <select id="type" name="type" onchange="updateFormFields()" required>
+        <option value="" disabled selected>Select</option>
+        <option value="article">Article</option>
+        <option value="book">Book</option>
+        <option value="misc">Misc</option>
+        <option value="inproceedings">Inproceedings</option>
+        <option value="booklet">Booklet</option>
+        <option value="conference">Conference</option>
+        <option value="inbook">Inbook</option>
+        <option value="incollection">Incollection</option>
+        <option value="manual">Manual</option>
+        <option value="mastersthesis">Mastersthesis</option>
+        <option value="phdthesis">Phdthesis</option>
+        <option value="proceedings">Proceedings</option>
+        <option value="techreport">Techreport</option>
+        <option value="unpublished">Unpublished</option>
+      </select>
     </div>
-    <div class="footer">
-      <input type="submit" value="Save reference" />
+    <div class="row" id="form-fields"></div>
+    <div class="row">
+      <label for="reference_keyword">Reference Keyword:</label>
+      <input
+        type="text"
+        id="reference_keyword"
+        name="reference_keyword"
+        required
+      />
+    </div>
+    <div class="row footer">
+      <input type="submit" value="Save Reference" />
       <button type="button" onclick="window.location.href='/'">Cancel</button>
     </div>
     {{message}}
@@ -50,5 +65,183 @@
       return false;
     }
   }
+  console.log(type);
+  const referenceFields = {
+    article: {
+      mandatory: ["author", "title", "journal", "year"],
+      optional: ["volume", "number", "pages", "month", "note"],
+    },
+    book: {
+      mandatory: ["author", "title", "booktitle", "publisher", "year"],
+      optional: [
+        "editor",
+        "volume",
+        "number",
+        "series",
+        "type",
+        "chapter",
+        "pages",
+        "address",
+        "edition",
+        "month",
+        "note",
+      ],
+    },
+    misc: {
+      mandatory: [],
+      optional: ["author", "title", "howpublished", "month", "year", "note"],
+    },
+    inproceedings: {
+      mandatory: ["author", "title", "booktitle", "year"],
+      optional: [
+        "editor",
+        "volume",
+        "number",
+        "series",
+        "pages",
+        "address",
+        "month",
+        "organization",
+        "publisher",
+      ],
+    },
+    booklet: {
+      mandatory: ["author", "title", "howpublished", "year", "address"],
+      optional: [
+        "editor",
+        "volume",
+        "number",
+        "series",
+        "organization",
+        "month",
+        "note",
+      ],
+    },
+    conference: {
+      mandatory: ["author", "title", "booktitle", "year"],
+      optional: [
+        "editor",
+        "volume",
+        "number",
+        "series",
+        "pages",
+        "address",
+        "month",
+        "organization",
+        "publisher",
+        "note",
+      ],
+    },
+    inbook: {
+      mandatory: ["author", "title", "booktitle", "publisher", "year"],
+      optional: [
+        "editor",
+        "volume",
+        "number",
+        "series",
+        "address",
+        "edition",
+        "month",
+        "pages",
+        "note",
+      ],
+    },
+    incollection: {
+      mandatory: ["author", "title", "booktitle", "publisher", "year"],
+      optional: [
+        "editor",
+        "volume",
+        "number",
+        "series",
+        "pages",
+        "address",
+        "month",
+      ],
+    },
+    manual: {
+      mandatory: ["title", "year"],
+      optional: [
+        "author",
+        "organization",
+        "address",
+        "edition",
+        "month",
+        "note",
+      ],
+    },
+    mastersthesis: {
+      mandatory: ["author", "title", "school", "year"],
+      optional: ["type", "address", "month", "note"],
+    },
+    phdthesis: {
+      mandatory: ["author", "title", "school", "year"],
+      optional: ["type", "address", "month", "note"],
+    },
+    proceedings: {
+      mandatory: ["title", "year"],
+      optional: [
+        "editor",
+        "volume",
+        "number",
+        "series",
+        "address",
+        "month",
+        "publisher",
+      ],
+    },
+    techreport: {
+      mandatory: ["author", "title", "institution", "year"],
+      optional: ["type", "number", "address", "month", "note"],
+    },
+    unpublished: {
+      mandatory: ["author", "title", "note"],
+      optional: ["month", "year"],
+    },
+  };
+  const updateFormFields = () => {
+    const type = document.getElementById("type").value;
+    const fields = referenceFields[type];
+    const formFieldsDiv = document.getElementById("form-fields");
+    formFieldsDiv.innerHTML = "";
+
+    // mandatory fields
+    fields.mandatory.forEach((field) => {
+      const row = document.createElement("div");
+      row.classList.add("row");
+
+      const label = document.createElement("label");
+      label.setAttribute("for", field);
+      label.innerText = field.charAt(0).toUpperCase() + field.slice(1) + ":";
+
+      const input = document.createElement("input");
+      input.type = "text";
+      input.name = field;
+      input.id = field;
+      input.required = true;
+      row.appendChild(label);
+      row.appendChild(input);
+      formFieldsDiv.appendChild(row);
+    });
+
+    formFieldsDiv.appendChild(document.createElement("br"));
+
+    // optional fields
+    fields.optional.forEach((field) => {
+      const row = document.createElement("div");
+      row.classList.add("row");
+
+      const label = document.createElement("label");
+      label.setAttribute("for", field);
+      label.innerText = field.charAt(0).toUpperCase() + field.slice(1) + ":";
+
+      const input = document.createElement("input");
+      input.type = "text";
+      input.name = field;
+      input.id = field;
+      row.appendChild(label);
+      row.appendChild(input);
+      formFieldsDiv.appendChild(row);
+    });
+  };
 </script>
 {% endblock %}
