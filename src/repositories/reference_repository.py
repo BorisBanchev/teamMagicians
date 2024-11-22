@@ -9,7 +9,10 @@ def get_references():
     references = result.fetchall()
     return [Reference(reference[0], reference[1], reference[2], reference[3], reference[4]) for reference in references]
 
-def create_reference(author, title, journal, year):
-    sql = text("INSERT INTO reference_list (author, title, journal, year) VALUES (:author, :title, :journal, :year)")
-    db.session.execute(sql,{"author":author, "title":title, "journal":journal, "year":year})
+def create_reference(fields):
+    columns = ", ".join(fields.keys())  # Field names
+    values = ", ".join(f":{key}" for key in fields.keys())  # Parameter placeholders
+
+    sql = text(f"INSERT INTO reference_list ({columns}) VALUES ({values})")
+    db.session.execute(sql, fields) 
     db.session.commit()
