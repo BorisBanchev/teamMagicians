@@ -31,8 +31,8 @@ def validate_reference(reference_type, fields):
     if "journal" in fields and len(fields["journal"]) < 3:
         raise UserInputError("Reference journal length must be greater than 2")
     
-    #if "year" in fields and int(fields["journal"]) <= 0 or int(fields["year"]) > 2025:
-        #raise UserInputError("Reference year must be positive and smaller than 2026")
+    if "year" in fields and int(fields["year"]) <= 0 or int(fields["year"]) > 2025:
+        raise UserInputError("Reference year must be positive and smaller than 2026")
 
 
 def raise_error(message):
