@@ -13,11 +13,13 @@ At start there are no references
 After adding a reference, there is one
     Go To  ${HOME_URL}
     Click Link  //a[contains(text(), "Add Reference")]
+    Select From List By Label  type  Article
     Input Text  author  Example1
     Input Text  title  Example2
     Input Text  journal  Example3
     Input Text  year  2000
-    Click Button  Save reference
+    Input Text  reference_keyword  article 
+    Click Button  Save Reference
     Page Should Contain  Example1
     Page Should Contain  Example2
     Page Should Contain  Example3
@@ -26,17 +28,21 @@ After adding a reference, there is one
 After adding two references there is two references
     Go To  ${HOME_URL}
     Click Link  //a[contains(text(), "Add Reference")]
+    Select From List By Label  type  Article
     Input Text  author  Example1
     Input Text  title  Example2
     Input Text  journal  Example3
     Input Text  year  2000
-    Click Button  Save reference
+    Input Text  reference_keyword  article 
+    Click Button  Save Reference
     Click Link  //a[contains(text(), "Add Reference")]
+    Select From List By Label  type  Article
     Input Text  author  Example4
     Input Text  title  Example5
     Input Text  journal  Example6
     Input Text  year  2001
-    Click Button  Save reference
+    Input Text  reference_keyword  article2
+    Click Button  Save Reference
     Page Should Contain  Example1
     Page Should Contain  Example2
     Page Should Contain  Example3
@@ -49,11 +55,13 @@ After adding two references there is two references
 After adding invalid reference there is no references
     Go To  ${HOME_URL}
     Click Link  //a[contains(text(), "Add Reference")]
+    Select From List By Label  type  Article
     Input Text  author  Example1
     Input Text  title  Example2
     Input Text  journal  Example3
     Input Text  year  2026
-    Click Button  Save reference
+    Input Text  reference_keyword  article 
+    Click Button  Save Reference
     Page Should Contain  smaller than 2026
     Click Button  Cancel
     Page Should Contain  No references.

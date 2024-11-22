@@ -6,3 +6,4 @@ report.html
 .coverage
 htmlcov
 interactive_console_output.xml
+selenium*.png
