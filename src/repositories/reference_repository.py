@@ -13,3 +13,8 @@ def create_reference(author, title, journal, year):
     sql = text("INSERT INTO reference_list (author, title, journal, year) VALUES (:author, :title, :journal, :year)")
     db.session.execute(sql,{"author":author, "title":title, "journal":journal, "year":year})
     db.session.commit()
+
+def delete_reference(id):
+    sql = text("DELETE FROM reference_list WHERE id= :id")
+    db.session.execute(sql, {"keyword":id})
+    db.session.commit()
