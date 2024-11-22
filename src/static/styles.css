@@ -46,6 +46,8 @@ label {
   line-height: 40px;
   padding: 0 40px;
   font-weight: 500;
+  min-width: 260px;
+  max-width: 260px;
 }
 
 input {
@@ -61,15 +63,6 @@ button {
   margin-right: 2em;
   padding: 0.5em 1em;
   border-radius: 0.5em;
-}
-
-label {
-  display: table-cell;
-  text-align: right;
-  font-size: 14px;
-  line-height: 40px;
-  padding: 0 40px;
-  font-weight: 500;
 }
 
 input {
@@ -97,4 +90,32 @@ th {
 
 .reference_row:nth-child(odd) {
   background-color: #e7e7e9;
+}
+
+.field_group {
+  padding-right: 12px;
+  margin-bottom: 12px;
+}
+
+.separator {
+  height: 1px;
+  width: 100%;
+  background-color: #2f2929;
+  margin-bottom: 12px;
+}
+
+.row {
+  position: relative;
+}
+
+.row.required::after {
+  display: block;
+  content: '*';
+  position: absolute;
+  font-size: 24px;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-20%);
+  padding-left: 12px;
+  color: red;
 }
