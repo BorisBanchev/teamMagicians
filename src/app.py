@@ -7,7 +7,13 @@ from util import validate_reference
 @app.route("/")
 def index():
     references = get_references()
-    return render_template("index.html", references=references)
+    all_fields = [
+    'reference_type', 'keyword', 'author', 'title', 'booktitle', 'publisher', 
+    'journal', 'year', 'editor', 'volume', 'number', 'series', 'type', 'chapter', 
+    'pages', 'address', 'edition', 'month', 'note', 'howpublished', 'organization'
+    ]
+
+    return render_template("index.html", references=references, all_fields=all_fields)
 
 
 @app.route("/add_reference", methods = ["POST", "GET"])

@@ -4,14 +4,30 @@ from sqlalchemy import text
 from entities.reference import Reference
 
 def get_references():
-    sql = text("SELECT id, author, title, journal, year FROM reference_list")
+    sql =  text("SELECT * FROM reference_list")
     result = db.session.execute(sql)
-    references = result.fetchall()
-    return [Reference(reference[0], reference[1], reference[2], reference[3], reference[4]) for reference in references]
+    field_names = result.keys()
+   
+    # make dictionaries with field-value pairs corresponding to each reference
+    rows = [dict(zip(field_names, row)) for row in result.fetchall()]
+    references = []
+    for dictionary in rows:
+        reference_id = dictionary["id"]
+        # filtering out empty or None fields
+        non_empty_fields = {key: value for key, value in dictionary.items() if value not in ("",None) and key != "id"}
+
+        # create reference instance
+        reference_instance = Reference(reference_id,non_empty_fields)
+        references.append(reference_instance)
+
+    return references
+    
+
+    
 
 def create_reference(fields):
     columns = ", ".join(fields.keys())  # Field names
-    values = ", ".join(f":{key}" for key in fields.keys())  # Parameter placeholders
+    values = ", ".join(f":{key}" for key in fields.keys())  # Parameter placeholders 
 
     sql = text(f"INSERT INTO reference_list ({columns}) VALUES ({values})")
     db.session.execute(sql, fields) 
