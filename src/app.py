@@ -40,7 +40,7 @@ def add_reference():
     return None
 
 
-@app.route("/delete_reference/<int:id>", methods=["POST"])
+@app.route("/delete_reference/<int:reference_id>", methods=["POST"])
 def delete_reference_route(reference_id):
     try:
         delete_reference(reference_id)
