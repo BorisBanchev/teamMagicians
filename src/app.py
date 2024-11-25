@@ -34,17 +34,18 @@ def add_reference():
 
             create_reference(all_fields)
             return redirect("/")
-        except Exception as error:
+        except ValueError as error:
             flash(str(error))
             return redirect("/add_reference")
+    return None
 
 
 @app.route("/delete_reference/<int:id>", methods=["POST"])
-def delete_reference_route(id):
+def delete_reference_route(reference_id):
     try:
-        delete_reference(id)
+        delete_reference(reference_id)
         flash("Reference deleted")
-    except Exception as e:
+    except ValueError as e:
         flash(f"Error deleting reference: {e}")
     return redirect("/")
 
