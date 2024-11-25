@@ -15,47 +15,41 @@ block head %} {{ super() }}
     <h2>References</h2>
   </div>
 
-  <div>
-    {% if references|length > 0 %}
-    <div class="row">
-      <p>Added references:</p>
-    </div>
-
-    <div class="row">
-      <table style="width: 100%; border-collapse: collapse">
-        <thead>
-          <tr>
-            {% for field in all_fields %}
-            <th>{{ field | capitalize }}</th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          {% for reference in references %}
-          <tr class="reference_row">
-            {% for field in all_fields %}
-            <td>{{ reference.fields.get(field, '') }}</td>
-            {% endfor %}
-            <td>
-              <form
-                action="/delete_reference/{{ reference.id }}"
-                method="post"
-                style="display: inline"
-              >
-                <button type="submit">Delete</button>
-              </form>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    {% else %}
-    <div class="row">
-      <label>No references. Click "Add Reference" to add.</label>
-    </div>
-    {% endif %}
+  {% if references | length > 0 %}
+  <div class="row">
+    <p>Added references:</p>
   </div>
+
+  <div class="table-container">
+    <table style="border-collapse: collapse" id="reference_table">
+      <thead>
+        <tr>
+          {% for field in all_fields %}
+          <th>{{ field | capitalize }}</th>
+          {% endfor %}
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reference in references %}
+        <tr class="reference_row">
+          {% for field in all_fields %}
+          <td>{{ reference.fields.get(field, '') }}</td>
+          {% endfor %}
+          <td>
+            <form action="/delete_reference/{{ reference.id }}" method="post" style="display: inline">
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% else %}
+  <div class="norefs">No references. Click "<b>Add Reference</b>" to add.</div>
+  {% endif %}
 
   <div class="footer">
     <a href="/add_reference" class="button">Add Reference</a>
