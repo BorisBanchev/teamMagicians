@@ -1,4 +1,6 @@
-class Reference:
-    def __init__(self, id, fields):
-        self.id = id
+class Reference: # pylint: disable=too-few-public-methods
+
+    def __init__(self, reference_id, fields):
+        self.reference_id = reference_id
         self.fields = fields
+        
