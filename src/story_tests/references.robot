@@ -62,9 +62,7 @@ After adding invalid reference there is no references
     Input Text  year  2027
     Input Text  keyword  article 
     Click Button  Save Reference
-    Page Should Contain  smaller than 2026
-    Click Button  Cancel
-    Page Should Contain  No references.
+    Alert Should Be Present  Reference year must be positive and smaller than 2026
 
 After adding valid reference delete reference
     Go To  ${HOME_URL}
