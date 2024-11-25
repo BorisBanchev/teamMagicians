@@ -57,7 +57,7 @@ input {
   font-size: 14px;
 }
 
-form input[type="submit"],
+/* form input[type="submit"],
 button {
   display: inline-block;
   font-size: 14px;
@@ -65,6 +65,22 @@ button {
   margin-right: 2em;
   padding: 0.5em 1em;
   border-radius: 0.5em;
+} */
+
+.button {
+  background-color: var(--invoice-bg);
+  padding: 6px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  color: black;
+}
+
+.button:hover {
+  background-color: var(--bg-clr);
+}
+
+a {
+  text-decoration: none;
 }
 
 input {
@@ -72,11 +88,21 @@ input {
   font-size: 14px;
 }
 
+.frames {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .frame {
   position: relative;
   padding: 8px;
   height: auto;
   background: var(--white);
+}
+
+.footer {
+  padding-bottom: 8px;
 }
 
 .table-container {
@@ -130,4 +156,31 @@ th {
 table {
   margin: 12px 0;
   overflow: auto;
+}
+
+#bibtex_frame {
+  opacity: 0;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bibtex-title {
+  font-size: 14px;
+  font-weight: 700;
+  padding-top: 8px;
+}
+
+.bibtex {
+  background-color: var(--invoice-bg);
+  padding: 12px;
+}
+
+.bibtex-copy {
+  width: fit-content;
+}
+
+pre {
+  font-family: monospace;
 }
