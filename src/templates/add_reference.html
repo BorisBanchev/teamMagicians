@@ -10,24 +10,14 @@ if messages %}
 </ul>
 {% endif %} {% endwith %}
 
-<form
-  id="reference-form"
-  action="/add_reference"
-  method="POST"
-  onsubmit="return check(this)"
->
+<form id="reference-form" action="/add_reference" method="POST" onsubmit="return check(this)">
   <div class="frame">
     <div class="info">
       <h2>Add Reference:</h2>
     </div>
     <div class="row">
       <label for="type">Reference Type:</label>
-      <select
-        id="type"
-        name="reference_type"
-        onchange="updateFormFields()"
-        required
-      >
+      <select id="type" name="reference_type" onchange="updateFormFields()" required>
         <option value="" disabled selected>Select</option>
         <option value="article">Article</option>
         <option value="book">Book</option>
@@ -56,8 +46,28 @@ if messages %}
 
 <script>
   function check(form) {
-    if (form.title.value.length > 100) {
-      alert("Title is too long");
+    if (form.keyword.value.length > 20) {
+      alert("Reference keyword length can't be greater than 20");
+      return false;
+    }
+    if (form.keyword.value.length == 0) {
+      alert("Reference keyword length can't be empty");
+      return false;
+    }
+    if (form.author.value.length < 3 && form.author.value.length > 0) {
+      alert("Reference author length must be greater than 2");
+      return false;
+    }
+    if ((form.title.value.length > 100 || form.title.value.length < 3) && form.title.value.length > 0) {
+      alert("Reference title length must be smaller than 100 and greater than 2");
+      return false;
+    }
+    if (form.journal.value.length < 3 && form.journal.value.length > 0) {
+      alert("Reference journal length must be greater than 2");
+      return false;
+    }
+    if ((form.year.value <= 0 || form.year.value > 2025) && form.year.value.length > 0) {
+      alert("Reference year must be positive and smaller than 2026");
       return false;
     }
   }
