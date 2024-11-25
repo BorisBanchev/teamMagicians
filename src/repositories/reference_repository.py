@@ -37,3 +37,12 @@ def delete_reference(id):
     sql = text("DELETE FROM reference_list WHERE id = :id")
     db.session.execute(sql, {"id":id})
     db.session.commit()
+
+def check_valid_keyword(keyword):
+    sql = text("SELECT keyword FROM reference_list")
+    keywords = db.session.execute(sql).fetchall()
+    list_keywords = [keyword[0] for keyword in keywords]
+    return keyword in list_keywords and len(keyword) > 0
+    
+    
+

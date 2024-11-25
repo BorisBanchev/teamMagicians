@@ -1,3 +1,5 @@
+from config import db, app
+from sqlalchemy import text
 class UserInputError(Exception):
     pass
 
@@ -33,6 +35,19 @@ def validate_reference(reference_type, fields):
     
     if "year" in fields and int(fields["year"]) <= 0 or int(fields["year"]) > 2025:
         raise UserInputError("Reference year must be positive and smaller than 2026")
+
+
+def check_valid_keyword(keyword):
+    sql = text("SELECT keyword FROM reference_list")
+    keywords = db.session.execute(sql).fetchall()
+    list_keywords = [keyword[0] for keyword in keywords]
+    if keyword in list_keywords:
+        raise  UserInputError("Reference keyword must be unique")
+    if len(keyword) > 20:
+        raise UserInputError("Reference keyword length can't be greater than 20")
+    if len(keyword) == 0:
+        raise UserInputError("Reference keyword length can't be empty")
+
 
 
 def raise_error(message):
