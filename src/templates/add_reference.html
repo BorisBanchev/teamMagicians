@@ -10,14 +10,24 @@ if messages %}
 </ul>
 {% endif %} {% endwith %}
 
-<form id="reference-form" action="/add_reference" method="POST" onsubmit="return check(this)">
+<form
+  id="reference-form"
+  action="/add_reference"
+  method="POST"
+  onsubmit="return check(this)"
+>
   <div class="frame">
     <div class="info">
       <h2>Add Reference:</h2>
     </div>
     <div class="row">
       <label for="type">Reference Type:</label>
-      <select id="type" name="reference_type" onchange="updateFormFields()" required>
+      <select
+        id="type"
+        name="reference_type"
+        onchange="updateFormFields()"
+        required
+      >
         <option value="" disabled selected>Select</option>
         <option value="article">Article</option>
         <option value="book">Book</option>
@@ -220,7 +230,11 @@ if messages %}
 
     const label = document.createElement("label");
     label.setAttribute("for", field);
-    label.innerText = (field.charAt(0).toUpperCase() + field.slice(1) + ":").replace(/_/g, " ");
+    label.innerText = (
+      field.charAt(0).toUpperCase() +
+      field.slice(1) +
+      ":"
+    ).replace(/_/g, " ");
 
     const input = document.createElement("input");
     input.type = "text";
@@ -230,6 +244,6 @@ if messages %}
     row.appendChild(label);
     row.appendChild(input);
     return row;
-  }
+  };
 </script>
 {% endblock %}

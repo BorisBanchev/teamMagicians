@@ -35,6 +35,7 @@ def add_reference():
             create_reference(all_fields)
             return redirect("/")
         except ValueError as error:
+            print("moi")
             flash(str(error))
             return redirect("/add_reference")
     return None
