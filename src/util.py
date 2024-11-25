@@ -48,7 +48,7 @@ def validate_reference(reference_type, fields):
     if "year" in fields:  # Check if year exists and is not empty
         if fields["year"] == "":
             pass
-        elif int(fields["year"]) < 0 or int(fields["year"]) >= 2025:  # Check range
+        elif int(fields["year"]) < 0 or int(fields["year"]) > 2025:  # Check range
             raise ValueError("Reference year must be positive and smaller than 2026")
 
     if "publisher" in fields and check_input_length(fields["publisher"]):
