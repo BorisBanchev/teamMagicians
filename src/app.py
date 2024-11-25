@@ -7,7 +7,13 @@ from util import validate_reference
 @app.route("/")
 def index():
     references = get_references()
-    return render_template("index.html", references=references)
+    all_fields = [
+    'reference_type', 'keyword', 'author', 'title', 'booktitle', 'publisher', 
+    'journal', 'year', 'editor', 'volume', 'number', 'series', 'type', 'chapter', 
+    'pages', 'address', 'edition', 'month', 'note', 'howpublished', 'organization'
+    ]
+
+    return render_template("index.html", references=references, all_fields=all_fields)
 
 
 @app.route("/add_reference", methods = ["POST", "GET"])
@@ -39,6 +45,16 @@ def delete_reference_route(id):
         flash(f"Error deleting reference: {e}")
     return redirect("/")
 
+
+
+@app.route("/delete_reference/<int:id>", methods = ["POST"])
+def delete_reference_route(id):
+    try:
+        delete_reference(id)
+        flash("Reference deleted")
+    except Exception as e:
+        flash(f"Error deleting reference: {e}")
+    return redirect("/")
 
 # testausta varten oleva reitti
 if test_env:

@@ -1,11 +1,9 @@
-{% extends "layout.html" %}
-{% block title %}Reference App{% endblock %}
-{% block head %}
-{{ super() }}
-<link rel="stylesheet" href="/static/styles.css">
-{% endblock %}
-{% block body %}
+{% extends "layout.html" %} {% block title %}Reference App{% endblock %} {%
+block head %} {{ super() }}
+<link rel="stylesheet" href="/static/styles.css" />
+{% endblock %} {% block body %}
 <div class="frame">
+<<<<<<< HEAD
 {% with messages = get_flashed_messages() %} {%
 if messages %}
 <ul>
@@ -18,14 +16,44 @@ if messages %}
 
     <div class="info">
         <h2>References</h2>
+=======
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %}
+
+  <div class="info">
+    <h2>References</h2>
+  </div>
+
+  <div>
+    {% if references|length > 0 %}
+    <div class="row">
+      <p>Added references:</p>
+>>>>>>> get_references
     </div>
 
-    <div>
-        {% if references|length > 0 %}
-        <div class="row">
-            <p>Added references:</p>
-        </div>
+    <div class="row">
+      <table style="width: 100%; border-collapse: collapse">
+        <thead>
+          <tr>
+            {% for field in all_fields %}
+            <th>{{ field | capitalize }}</th>
+            {% endfor %}
+            <!-- <th>Actions</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          {%for reference in references%}
+          <tr class="reference_row">
+            {% for field in all_fields %}
+            <td>{{ reference.fields.get(field, '') }}</td>
+            {% endfor %}
 
+<<<<<<< HEAD
         <div class="row">
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
@@ -69,11 +97,32 @@ if messages %}
             <label>No references. Click "Add Reference" to add.</label>
         </div>
         {% endif %}
+=======
+            <td>
+              <form
+                action="/delete_reference/{{reference.id}}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+>>>>>>> get_references
     </div>
 
-
-    <div class="footer">
-        <a href="/add_reference" class="button">Add Reference</a>
+    {% else %}
+    <div class="row">
+      <label>No references. Click "Add Reference" to add.</label>
     </div>
+    {% endif %}
+  </div>
+
+  <div class="footer">
+    <a href="/add_reference" class="button">Add Reference</a>
+  </div>
 </div>
 {% endblock %}
