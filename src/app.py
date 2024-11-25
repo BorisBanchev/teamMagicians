@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, jsonify, flash
 from config import app, test_env
 from db_helper import reset_db
 from repositories.reference_repository import create_reference, get_references, delete_reference
-from util import validate_reference
+from util import validate_reference, check_valid_keyword
 
 @app.route("/")
 def index():
@@ -28,14 +28,13 @@ def add_reference():
 
 
         try:
+            check_valid_keyword(all_fields["keyword"])
             validate_reference(all_fields["reference_type"], all_fields)  # Dynamic validation
             create_reference(all_fields)
             return redirect("/")
         except Exception as error:
             flash(str(error))
             return redirect("/add_reference")
-        
-
 
 
 
