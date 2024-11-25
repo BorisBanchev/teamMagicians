@@ -3,20 +3,6 @@ block head %} {{ super() }}
 <link rel="stylesheet" href="/static/styles.css" />
 {% endblock %} {% block body %}
 <div class="frame">
-<<<<<<< HEAD
-{% with messages = get_flashed_messages() %} {%
-if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %} {% endwith %}
-
-
-    <div class="info">
-        <h2>References</h2>
-=======
   {% with messages = get_flashed_messages() %} {% if messages %}
   <ul>
     {% for message in messages %}
@@ -33,7 +19,6 @@ if messages %}
     {% if references|length > 0 %}
     <div class="row">
       <p>Added references:</p>
->>>>>>> get_references
     </div>
 
     <div class="row">
@@ -43,64 +28,17 @@ if messages %}
             {% for field in all_fields %}
             <th>{{ field | capitalize }}</th>
             {% endfor %}
-            <!-- <th>Actions</th> -->
           </tr>
         </thead>
         <tbody>
-          {%for reference in references%}
+          {% for reference in references %}
           <tr class="reference_row">
             {% for field in all_fields %}
             <td>{{ reference.fields.get(field, '') }}</td>
             {% endfor %}
-
-<<<<<<< HEAD
-        <div class="row">
-            <table style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr>
-                        <th>Author</th>
-                        <th>Title</th>
-                        <th>Journal</th>
-                        <th>Year</th>
-                        <!-- <th>Actions</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-
-
-                    {%for reference in references%}
-                    <tr class="reference_row">
-                        <td>{{reference.author}}</td>
-                        <td>{{reference.title}}</td>
-                        <td>{{reference.journal}}</td>
-                        <td>{{reference.year}}</td>
-
-                        <td>
-                        <!-- <form action="/modify_reference/{{reference.id}}"
-                        method="get" style= "display: inline;">
-                        <button type="submit"> Modify</button>
-                    </form> -->
-
-                    <form action= "/delete_reference/{{reference.id}}"
-                        method="post" style ="display: inline;">
-                        <button type="submit">Delete</button>
-                    </form>
-                        </td>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-        </div>
-
-        {% else %}
-        <div class="row">
-            <label>No references. Click "Add Reference" to add.</label>
-        </div>
-        {% endif %}
-=======
             <td>
               <form
-                action="/delete_reference/{{reference.id}}"
+                action="/delete_reference/{{ reference.id }}"
                 method="post"
                 style="display: inline"
               >
@@ -108,12 +46,10 @@ if messages %}
               </form>
             </td>
           </tr>
-          {%endfor%}
+          {% endfor %}
         </tbody>
       </table>
->>>>>>> get_references
     </div>
-
     {% else %}
     <div class="row">
       <label>No references. Click "Add Reference" to add.</label>
