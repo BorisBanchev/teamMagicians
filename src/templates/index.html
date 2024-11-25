@@ -38,7 +38,11 @@ block head %} {{ super() }}
             <td>{{ reference.fields.get(field, '') }}</td>
             {% endfor %}
             <td>
-              <form action="/delete_reference/{{ reference.id }}" method="post" style="display: inline">
+              <form
+                action="/delete_reference/{{ reference.reference_id }}"
+                method="post"
+                style="display: inline"
+              >
                 <button type="submit" class="button">Delete</button>
               </form>
             </td>
@@ -49,7 +53,9 @@ block head %} {{ super() }}
     </div>
 
     {% else %}
-    <div class="norefs">No references. Click "<b>Add Reference</b>" to add.</div>
+    <div class="norefs">
+      No references. Click "<b>Add Reference</b>" to add.
+    </div>
     {% endif %}
 
     <div class="footer">
@@ -63,7 +69,9 @@ block head %} {{ super() }}
     <div class="bibtex-container">
       <div class="bibtex" id="bibtex"></div>
     </div>
-    <div class="bibtex-copy button" onclick="copy_bibtex()">Copy to clipboard</div>
+    <div class="bibtex-copy button" onclick="copy_bibtex()">
+      Copy to clipboard
+    </div>
   </div>
 </div>
 
@@ -72,11 +80,11 @@ block head %} {{ super() }}
   const render_bibtex = () => {
     const table = document.getElementById("reference_table");
     const refs = parse_table(table);
-    const formatted = refs.map(ref => {
+    const formatted = refs.map((ref) => {
       const type = get_prop(ref, "Reference_type");
       return `@${type}{${get_prop(ref, "Keyword")},\n${ref
-        .filter(r => !["Reference_type", "Keyword"].includes(r.header))
-        .map(r => `    ${r.header.toLowerCase()} = "${r.content}"`)
+        .filter((r) => !["Reference_type", "Keyword"].includes(r.header))
+        .map((r) => `    ${r.header.toLowerCase()} = "${r.content}"`)
         .join(",\n")}\n}`;
     });
 
@@ -94,7 +102,7 @@ block head %} {{ super() }}
   };
 
   const get_prop = (ref, prop) => {
-    return ref.find(r => r.header === prop).content;
+    return ref.find((r) => r.header === prop).content;
   };
 
   const parse_table = (table) => {
@@ -103,9 +111,14 @@ block head %} {{ super() }}
     for (const row of [...table.rows].slice(1)) {
       const props = [];
       for (let i = 0; i < header.length; i++) {
-        props.push({ header: header[i].innerHTML, content: [...row.cells][i].innerHTML })
+        props.push({
+          header: header[i].innerHTML,
+          content: [...row.cells][i].innerHTML,
+        });
       }
-      refs.push(props.filter(p => p.content !== "" && p.header !== "Actions"));
+      refs.push(
+        props.filter((p) => p.content !== "" && p.header !== "Actions")
+      );
     }
     return refs;
   };
