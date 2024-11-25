@@ -6,6 +6,16 @@
 {% endblock %}
 {% block body %}
 <div class="frame">
+{% with messages = get_flashed_messages() %} {%
+if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %} {% endwith %}
+
+
     <div class="info">
         <h2>References</h2>
     </div>
@@ -38,15 +48,15 @@
                         <td>{{reference.year}}</td>
 
                         <td>
-                            <!-- <form action="/modify_reference/{{reference.id}}"
+                        <!-- <form action="/modify_reference/{{reference.id}}"
                         method="get" style= "display: inline;">
                         <button type="submit"> Modify</button>
-                    </form>
+                    </form> -->
 
                     <form action= "/delete_reference/{{reference.id}}"
                         method="post" style ="display: inline;">
                         <button type="submit">Delete</button>
-                    </form> -->
+                    </form>
                         </td>
                     </tr>
                     {%endfor%}
