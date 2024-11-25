@@ -2,57 +2,112 @@
 block head %} {{ super() }}
 <link rel="stylesheet" href="/static/styles.css" />
 {% endblock %} {% block body %}
-<div class="frame">
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %} {% endwith %}
+<div class="frames">
+  <div class="frame">
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
 
-  <div class="info">
-    <h2>References</h2>
-  </div>
+    <div class="info">
+      <h2>References</h2>
+    </div>
 
-  {% if references | length > 0 %}
-  <div class="row">
-    <p>Added references:</p>
-  </div>
+    {% if references | length > 0 %}
+    <div class="row">
+      <p>Added references:</p>
+    </div>
 
-  <div class="table-container">
-    <table style="border-collapse: collapse" id="reference_table">
-      <thead>
-        <tr>
-          {% for field in all_fields %}
-          <th>{{ field | capitalize }}</th>
+    <div class="table-container">
+      <table style="border-collapse: collapse" id="reference_table">
+        <thead>
+          <tr>
+            {% for field in all_fields %}
+            <th>{{ field | capitalize }}</th>
+            {% endfor %}
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for reference in references %}
+          <tr class="reference_row">
+            {% for field in all_fields %}
+            <td>{{ reference.fields.get(field, '') }}</td>
+            {% endfor %}
+            <td>
+              <form action="/delete_reference/{{ reference.id }}" method="post" style="display: inline">
+                <button type="submit" class="button">Delete</button>
+              </form>
+            </td>
+          </tr>
           {% endfor %}
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for reference in references %}
-        <tr class="reference_row">
-          {% for field in all_fields %}
-          <td>{{ reference.fields.get(field, '') }}</td>
-          {% endfor %}
-          <td>
-            <form action="/delete_reference/{{ reference.id }}" method="post" style="display: inline">
-              <button type="submit">Delete</button>
-            </form>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
+
+    {% else %}
+    <div class="norefs">No references. Click "<b>Add Reference</b>" to add.</div>
+    {% endif %}
+
+    <div class="footer">
+      <a href="/add_reference" class="button">Add Reference</a>
+      <a onclick="render_bibtex()" class="button">Render BibTeX</a>
+    </div>
   </div>
 
-  {% else %}
-  <div class="norefs">No references. Click "<b>Add Reference</b>" to add.</div>
-  {% endif %}
-
-  <div class="footer">
-    <a href="/add_reference" class="button">Add Reference</a>
+  <div class="frame" id="bibtex_frame">
+    <div class="bibtex-title">BibTeX code:</div>
+    <div class="bibtex-container">
+      <div class="bibtex" id="bibtex"></div>
+    </div>
+    <div class="bibtex-copy button" onclick="copy_bibtex()">Copy to clipboard</div>
   </div>
 </div>
+
+<script>
+  let bibtex_text = "";
+  const render_bibtex = () => {
+    const table = document.getElementById("reference_table");
+    const refs = parse_table(table);
+    const formatted = refs.map(ref => {
+      const type = get_prop(ref, "Reference_type");
+      return `@${type}{${get_prop(ref, "Keyword")},\n${ref
+        .filter(r => !["Reference_type", "Keyword"].includes(r.header))
+        .map(r => `    ${r.header.toLowerCase()} = "${r.content}"`)
+        .join(",\n")}\n}`;
+    });
+
+    for (const ref of formatted) {
+      console.log(ref);
+    }
+
+    document.getElementById("bibtex_frame").style.opacity = 1;
+    bibtex_text = formatted.join("\n\n");
+    document.getElementById("bibtex").innerHTML = `<pre>${bibtex_text}</pre>`;
+  };
+
+  const copy_bibtex = () => {
+    navigator.clipboard.writeText(bibtex_text);
+  };
+
+  const get_prop = (ref, prop) => {
+    return ref.find(r => r.header === prop).content;
+  };
+
+  const parse_table = (table) => {
+    const header = [...table.rows[0].cells];
+    const refs = [];
+    for (const row of [...table.rows].slice(1)) {
+      const props = [];
+      for (let i = 0; i < header.length; i++) {
+        props.push({ header: header[i].innerHTML, content: [...row.cells][i].innerHTML })
+      }
+      refs.push(props.filter(p => p.content !== "" && p.header !== "Actions"));
+    }
+    return refs;
+  };
+</script>
 {% endblock %}
