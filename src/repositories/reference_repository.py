@@ -1,5 +1,5 @@
-from config import db
 from sqlalchemy import text
+from config import db
 
 from entities.reference import Reference
 
@@ -35,9 +35,9 @@ def create_reference(fields):
     db.session.commit()
 
 
-def delete_reference(id):
+def delete_reference(reference_id):
     sql = text("DELETE FROM reference_list WHERE id = :id")
-    db.session.execute(sql, {"id": id})
+    db.session.execute(sql, {"id": reference_id})
     db.session.commit()
 
 
