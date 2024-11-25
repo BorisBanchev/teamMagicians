@@ -37,22 +37,22 @@ def validate_reference(reference_type, fields):
         raise ValueError("At least one field needs to be maintained.")
 
     if "author" in fields and check_input_length(fields["author"]):
-        raise UserInputError("Reference author length must be greater than 2")
+        raise ValueError("Reference author length must be greater than 2")
 
     if "title" in fields and check_input_length(fields["title"]) or len(fields["title"]) > 100:
-        raise UserInputError("Reference title length must be smaller than 100 and greater than 2")
+        raise ValueError("Reference title length must be smaller than 100 and greater than 2")
 
     if "journal" in fields and check_input_length(fields["journal"]):
-        raise UserInputError("Reference journal length must be greater than 2")
+        raise ValueError("Reference journal length must be greater than 2")
 
     if "year" in fields:  # Check if year exists and is not empty
         if fields["year"] == "":
             pass
         elif int(fields["year"]) < 0 or int(fields["year"]) >= 2025:  # Check range
-            raise UserInputError("Reference year must be positive and smaller than 2026")
+            raise ValueError("Reference year must be positive and smaller than 2026")
 
     if "publisher" in fields and check_input_length(fields["publisher"]):
-        raise UserInputError("Reference publisher length must be greater than 2")
+        raise ValueError("Reference publisher length must be greater than 2")
 
 def check_input_length(field):
     if len(field) > 0 and len(field) < 3:
@@ -64,11 +64,11 @@ def check_valid_keyword(keyword):
     keywords = db.session.execute(sql).fetchall()
     list_keywords = [keyword[0] for keyword in keywords]
     if keyword in list_keywords:
-        raise  UserInputError("Reference keyword must be unique")
+        raise  ValueError("Reference keyword must be unique")
     if len(keyword) > 20:
-        raise UserInputError("Reference keyword length can't be greater than 20")
+        raise ValueError("Reference keyword length can't be greater than 20")
     if len(keyword) == 0:
-        raise UserInputError("Reference keyword length can't be empty")
+        raise ValueError("Reference keyword length can't be empty")
 
 def raise_error(message):
-    raise UserInputError(message)
+    raise ValueError(message)
