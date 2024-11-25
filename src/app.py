@@ -35,15 +35,7 @@ def add_reference():
             flash(str(error))
             return redirect("/add_reference")
         
-        
-@app.route("/delete_reference/<int:id>", methods = ["POST"])
-def delete_reference_route(id):
-    try:
-        delete_reference(id)
-        flash("Reference deleted")
-    except Exception as e:
-        flash(f"Error deleting reference: {e}")
-    return redirect("/")
+
 
 
 
