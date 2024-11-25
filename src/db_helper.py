@@ -1,7 +1,7 @@
-from config import db, app
 from sqlalchemy import text
+from config import db, app
 
-table = "reference_list"
+table = "reference_list"  # pylint: disable=invalid-name
 
 
 def initialize_database():
