@@ -48,5 +48,7 @@ jobs:
         run: poetry run pytest
       - name: Run robot tests
         run: bash run_robot_tests.sh
+      - name: Lint
+        run: poetry run pylint src
 
       
