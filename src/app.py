@@ -31,6 +31,7 @@ def add_reference():
             check_valid_keyword(all_fields["keyword"])
             # Dynamic validation
             validate_reference(all_fields["reference_type"], all_fields)
+
             create_reference(all_fields)
             return redirect("/")
         except Exception as error:
