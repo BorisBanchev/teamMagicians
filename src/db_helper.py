@@ -20,7 +20,7 @@ def initialize_database():
                    booktitle TEXT,
                    publisher TEXT,
                    journal TEXT,
-                   year INT,
+                   year TEXT,
                    editor TEXT,
                    volume TEXT,
                    number TEXT,

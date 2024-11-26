@@ -35,7 +35,6 @@ def add_reference():
             create_reference(all_fields)
             return redirect("/")
         except ValueError as error:
-            print("moi")
             flash(str(error))
             return redirect("/add_reference")
     return None
@@ -46,8 +45,8 @@ def delete_reference_route(reference_id):
     try:
         delete_reference(reference_id)
         flash("Reference deleted")
-    except ValueError as e:
-        flash(f"Error deleting reference: {e}")
+    except ValueError as error_message:
+        flash(f"Error deleting reference: {error_message}")
     return redirect("/")
 
 
