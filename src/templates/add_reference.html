@@ -10,11 +10,20 @@ if messages %}
 </ul>
 {% endif %} {% endwith %}
 
-<form id="reference-form" action="/add_reference" method="POST" onsubmit="return check(this)">
-  <div class="frame">
-    <div class="info">
-      <h2>Add Reference:</h2>
+<div class="frame">
+  <div class="info">
+    <h2>Add Reference:</h2>
+  </div>
+
+  <form id="reference-fetch-form" action="/fetch_reference" method="POST">
+    <div class="row">
+      <label for="doi_fetch">Fetch by DOI:</label>
+      <input id="doi_fetch" type="text" name="doi_fetch">
+      <input type="submit" value="Fetch Reference" />
     </div>
+  </form>
+
+  <form id="reference-form" action="/add_reference" method="POST" onsubmit="return check(this)">
     <div class="row">
       <label for="type">Reference Type:</label>
       <select id="type" name="reference_type" onchange="updateFormFields()" required>
@@ -40,9 +49,10 @@ if messages %}
       <input type="submit" value="Save Reference" />
       <button type="button" onclick="window.location.href='/'">Cancel</button>
     </div>
-    {{message}}
-  </div>
-</form>
+  </form>
+
+  {{message}}
+</div>
 
 <script>
   function check(form) {
@@ -71,7 +81,7 @@ if messages %}
       return false;
     }
   }
-  console.log(type);
+
   const referenceFields = {
     article: {
       mandatory: ["author", "title", "journal", "year"],
@@ -255,5 +265,21 @@ if messages %}
     row.appendChild(input);
     return row;
   };
+
+  if ("{{fetch_data}}") {
+    const string2 = "{{fetch_data}}".replace(/&#34;/g, '"').replace(/False/g, "false").replace(/True/g, "true");
+    const data = JSON.parse(string2);
+    if (data.type.endsWith("-article")) {
+      document.getElementById("type").value = "article";
+      updateFormFields();
+      for (const field of referenceFields["article"].mandatory) {
+        if (field == "author") document.getElementById(field).value = data[field].join(" and ");
+        else document.getElementById(field).value = data[field];
+      }
+      for (const field of referenceFields["article"].optional) {
+        if (data[field]) document.getElementById(field).value = data[field];
+      }
+    }
+  }
 </script>
 {% endblock %}
