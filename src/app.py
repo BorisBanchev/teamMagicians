@@ -1,8 +1,10 @@
+import json
 from flask import redirect, render_template, request, jsonify, flash
 from config import app, test_env
 from db_helper import reset_db
 from repositories.reference_repository import create_reference, get_references, delete_reference
 from util import validate_reference, check_valid_keyword
+from api import fetch_work
 
 
 @app.route("/")
@@ -25,8 +27,7 @@ def add_reference():
     if request.method == "POST":
         all_fields = request.form.to_dict()
 
-        # Retrieve all fields submitted by the user
-
+    # Retrieve all fields submitted by the user
         try:
             check_valid_keyword(all_fields["keyword"])
             # Dynamic validation
@@ -38,6 +39,12 @@ def add_reference():
             flash(str(error))
             return redirect("/add_reference")
     return None
+
+@app.route("/fetch_reference", methods=["POST"])
+def fetch_reference():
+    data = fetch_work(request.form.to_dict()["doi_fetch"])
+    print(data)
+    return render_template("add_reference.html", fetch_data=json.dumps(data))
 
 
 @app.route("/delete_reference/<int:reference_id>", methods=["POST"])
