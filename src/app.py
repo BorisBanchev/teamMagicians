@@ -66,14 +66,15 @@ def delete_reference_route(reference_id):
         flash(f"Error deleting reference: {error_message}")
     return redirect("/")
 
-@app.route("/modify_reference/<int:reference_id>", methods =["POST", "GET"])
+@app.route("/modify_reference/<int:reference_id>", methods =["GET", "POST"])
 def modify_reference_route(reference_id):
     if request.method == "GET":
         reference = get_reference(reference_id)
+        print(f"Reference with reference_id {reference_id} is {reference}")
         return render_template("modify_reference.html", reference=reference)
-
     if request.method == "POST":
         all_fields = request.form.to_dict()
+        print("All fields received:", all_fields)
         try:
             validate_reference(all_fields["reference_type"], all_fields)
 
@@ -83,7 +84,6 @@ def modify_reference_route(reference_id):
             flash(str(error))
             return redirect("/modify_reference")
     return None
-
 
 # testausta varten oleva reitti
 if test_env:
