@@ -47,6 +47,15 @@ block head %} {{ super() }}
                 <button type="submit" class="button delete">Delete</button>
               </form>
             </td>
+            <td>
+              <form
+                action="/modify_reference/{{ reference.reference_id }}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit" class="button">Modify</button>
+              </form>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
