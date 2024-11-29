@@ -18,7 +18,7 @@ def fetch_work(doi):
     else:
         work["year"] = work["published-print"]["date-parts"][0][0]
     work["title"] = work["title"][0]
-    
+
     return work
 
 def fix_names(authors):
@@ -32,5 +32,4 @@ def fix_names(authors):
 
 if __name__ == "__main__":
     print(fetch_work("10.1109/MSPEC.2016.7439593"))
-
     
