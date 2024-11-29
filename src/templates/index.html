@@ -85,7 +85,12 @@ block head %} {{ super() }}
   let bibtex_text = "";
   const render_bibtex = () => {
     const table = document.getElementById("reference_table");
+    if (!table) {
+      alert("Rendering failed! No references given!");
+      return;
+    }
     const refs = parse_table(table);
+
     const formatted = refs.map((ref) => {
       const type = get_prop(ref, "Reference_type");
       return `@${type}{${get_prop(ref, "Keyword")},\n${ref
