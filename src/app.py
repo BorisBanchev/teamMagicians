@@ -3,7 +3,13 @@ import re
 from flask import redirect, render_template, request, jsonify, flash
 from config import app, test_env
 from db_helper import reset_db
-from repositories.reference_repository import create_reference, get_references, delete_reference
+from repositories.reference_repository import (
+    create_reference,
+    get_references,
+    delete_reference,
+    get_reference,
+    modify_reference
+)
 from util import validate_reference, check_valid_keyword
 from api import fetch_work
 
@@ -59,6 +65,24 @@ def delete_reference_route(reference_id):
     except ValueError as error_message:
         flash(f"Error deleting reference: {error_message}")
     return redirect("/")
+
+@app.route("/modify_reference/<int:reference_id>", methods =["POST", "GET"])
+def modify_reference_route(reference_id):
+    if request.method == "GET":
+        reference = get_reference(reference_id)
+        return render_template("modify_reference.html", reference=reference)
+
+    if request.method == "POST":
+        all_fields = request.form.to_dict()
+        try:
+            validate_reference(all_fields["reference_type"], all_fields)
+
+            modify_reference(reference_id, all_fields)
+            return redirect("/")
+        except ValueError as error:
+            flash(str(error))
+            return redirect("/modify_reference")
+    return None
 
 
 # testausta varten oleva reitti
