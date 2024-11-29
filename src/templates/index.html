@@ -58,7 +58,7 @@ block head %} {{ super() }}
     </div>
     {% endif %}
 
-    <div class="footer">
+    <div class="button-container">
       <a href="/add_reference" class="button">Add Reference</a>
       <a onclick="render_bibtex()" class="button">Render BibTeX</a>
     </div>
@@ -69,8 +69,14 @@ block head %} {{ super() }}
     <div class="bibtex-container">
       <div class="bibtex" id="bibtex"></div>
     </div>
-    <div class="bibtex-copy button" onclick="copy_bibtex()">
-      Copy to clipboard
+
+    <div class="button-container">
+      <button style="border: none" class="button" onclick="copy_bibtex()">
+        Copy to clipboard
+      </button>
+      <button style="border: none" class="button" onclick="downloadFile()">
+        Download BibTeX file
+      </button>
     </div>
   </div>
 </div>
@@ -79,7 +85,12 @@ block head %} {{ super() }}
   let bibtex_text = "";
   const render_bibtex = () => {
     const table = document.getElementById("reference_table");
+    if (!table) {
+      alert("Rendering failed! No references given!");
+      return;
+    }
     const refs = parse_table(table);
+
     const formatted = refs.map((ref) => {
       const type = get_prop(ref, "Reference_type");
       return `@${type}{${get_prop(ref, "Keyword")},\n${ref
@@ -121,6 +132,17 @@ block head %} {{ super() }}
       );
     }
     return refs;
+  };
+</script>
+<script>
+  const downloadFile = () => {
+    const link = document.createElement("a");
+    const content = bibtex_text;
+    const file = new Blob([content], { type: "text/plain" });
+    link.href = URL.createObjectURL(file);
+    link.download = "references.bib";
+    link.click();
+    URL.revokeObjectURL(link.href);
   };
 </script>
 {% endblock %}
