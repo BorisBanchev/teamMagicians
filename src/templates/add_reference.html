@@ -26,7 +26,12 @@ if messages %}
   <form id="reference-form" action="/add_reference" method="POST" onsubmit="return check(this)">
     <div class="row">
       <label for="type">Reference Type:</label>
-      <select id="type" name="reference_type" onchange="updateFormFields()" required>
+      <select
+        id="type"
+        name="reference_type"
+        onchange="updateFormFields()"
+        required
+      >
         <option value="" disabled selected>Select</option>
         <option value="article">Article</option>
         <option value="book">Book</option>
@@ -45,9 +50,22 @@ if messages %}
       </select>
     </div>
     <div class="row" id="form-fields"></div>
-    <div class="row footer">
-      <input type="submit" value="Save Reference" />
-      <button type="button" onclick="window.location.href='/'">Cancel</button>
+    <div class="button-container">
+      <button
+        style="margin-right: 8px; border: none"
+        class="button"
+        type="submit"
+      >
+        Save Reference
+      </button>
+      <button
+        style="border: none"
+        class="button"
+        type="button"
+        onclick="window.location.href='/'"
+      >
+        Cancel
+      </button>
     </div>
   </form>
 
@@ -68,15 +86,23 @@ if messages %}
       alert("Reference author length must be greater than 2");
       return false;
     }
-    if ((form.title.value.length > 100 || form.title.value.length < 3) && form.title.value.length > 0) {
-      alert("Reference title length must be smaller than 100 and greater than 2");
+    if (
+      (form.title.value.length > 100 || form.title.value.length < 3) &&
+      form.title.value.length > 0
+    ) {
+      alert(
+        "Reference title length must be smaller than 100 and greater than 2"
+      );
       return false;
     }
     if (form.journal.value.length < 3 && form.journal.value.length > 0) {
       alert("Reference journal length must be greater than 2");
       return false;
     }
-    if ((form.year.value <= 0 || form.year.value > 2025) && form.year.value.length > 0) {
+    if (
+      (form.year.value <= 0 || form.year.value > 2025) &&
+      form.year.value.length > 0
+    ) {
       alert("Reference year must be positive and smaller than 2026");
       return false;
     }
