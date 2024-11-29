@@ -32,4 +32,3 @@ def fix_names(authors):
 
 if __name__ == "__main__":
     print(fetch_work("10.1109/MSPEC.2016.7439593"))
-    
