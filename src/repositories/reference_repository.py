@@ -25,10 +25,8 @@ def get_references():
     return references
 
 def get_reference(reference_id):
-    sql = text("SELECT * FROM reference_list WHERE id = :id")
-    result=db.session.execute(sql, {"id": reference_id})
-    db.session.commit()
-    reference = result.fetchone()
+    sql = text("SELECT * FROM reference_list WHERE id=:id")
+    reference = db.session.execute(sql, {"id":reference_id}).fetchone()
     return reference
 
 def create_reference(fields):
