@@ -39,9 +39,10 @@ block head %} {{ super() }}
             {% endfor %}
             <td>
               <form
-                action="/delete_reference/{{ reference.reference_id }}"
-                method="post"
-                style="display: inline"
+              action="/delete_reference/{{ reference.reference_id }}"
+              method="post"
+              style="display: inline"
+              onsubmit="return confirmDeletion();"
               >
                 <button type="submit" class="button">Delete</button>
               </form>
@@ -144,5 +145,10 @@ block head %} {{ super() }}
     link.click();
     URL.revokeObjectURL(link.href);
   };
+</script>
+<script>
+  function confirmDeletion() {
+    return confirm("Are you sure you want to delete this reference?");
+  }
 </script>
 {% endblock %}
