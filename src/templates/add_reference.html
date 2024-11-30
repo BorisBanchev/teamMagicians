@@ -100,10 +100,10 @@ if messages %}
       return false;
     }
     if (
-      (form.year.value <= 0 || form.year.value > 2025) &&
+      (parseInt(form.year.value) <= 0 || parseInt(form.year.value) > 2024) &&
       form.year.value.length > 0
     ) {
-      alert("Reference year must be positive and smaller than 2026");
+      alert("Reference year must be positive and smaller than 2025");
       return false;
     }
   }
