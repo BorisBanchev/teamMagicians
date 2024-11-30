@@ -79,4 +79,5 @@ After adding valid reference delete reference
     Page Should Contain  Example3
     Page Should Contain  2000
     Click Button  Delete
+    Handle Alert  accept
     Page Should Contain  No references.
