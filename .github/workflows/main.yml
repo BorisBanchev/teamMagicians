@@ -4,7 +4,7 @@ env:
   DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
   TEST_ENV: true
   SECRET_KEY: secret
-  
+
 on:
   push:
     branches: [main]
@@ -33,7 +33,7 @@ jobs:
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
       - name: Install Poetry
         run: pip install poetry
       - name: Setup chromedriver
@@ -45,10 +45,14 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Run tests
-        run: poetry run pytest
+        run: poetry run coverage run --branch -m pytest
+      - name: Coverage report
+        run: poetry run coverage xml
+      - name: Coverage report to Codecov
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Run robot tests
         run: bash run_robot_tests.sh
       - name: Lint
         run: poetry run pylint src
-
-      

@@ -8,32 +8,29 @@ Tämä retrospektiivi toteutettiin käyttäen **Start, Stop, Continue, More of, 
 ## Keskustelun pääkohdat
 
 ### Start (Mitä pitäisi aloittaa?)
-- A
-- B
+- Parikoodausta, jotta opimme toisiltamme ja käytämme kaikkien vahvuuksia.
 
 ### Stop (Mitä pitäisi lopettaa?)
-- A
-- B
+- Muiden kuin user storeihin liittyvien toiminnallisuuksien kehittäminen.
+- Poukkoilu asioiden välillä.
 
 ### Continue (Mitä toimii ja kannattaa jatkaa?)
-- A
-- B
+- Yhdessä tekeminen livenä on ollut toimivaa.
 
 ### More of (Mitä pitäisi tehdä enemmän?)
-- A
-- B
+- Keskittyä puhtaamin user storien vaatimuksiin.
+- Tehdä asioita kokonaisuus kerrallaan.
 
 ### Less of (Mitä pitäisi tehdä vähemmän?)
-- A
-- B
+- Keskittyä vähemmän ulkoasuun ja enemmän toiminnallisuuksiin.
 
 ---
 
 ## Kehitystoimenpiteet seuraavaan sprinttiin
-1. 
-2. 
+1. Enemmän parikoodausta.
+2. Tehdä asioita kokonaisuus kerrallaan.
 
 ---
 
-*Retrospektiivi pidettiin 29.11.2024*  
-*Facilitaattori: XXXX*
+*Retrospektiivi pidettiin 2.12.2024*  
+
