@@ -35,7 +35,7 @@ block head %} {{ super() }}
           {% for reference in references %}
           <tr class="reference_row">
             {% for field in all_fields %}
-            <td>{{ reference.fields.get(field, '') }}</td>
+            <td><span class="td-content">{{ reference.fields.get(field, '') }}</span></td>
             {% endfor %}
             <td>
               <form
