@@ -1,6 +1,7 @@
 :root {
   --bg-clr: #b3b3b3;
   --white: #fff;
+  --readonly: #d4d4d4;
   --invoice-bg: #e7e7e9;
   --primary-clr: #2f2929;
   --red: #ffc2c2;
@@ -57,6 +58,10 @@ label {
 input {
   display: table-cell;
   font-size: 14px;
+}
+
+input[readonly]{
+  background-color: var(--readonly);
 }
 
 .button-container {

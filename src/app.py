@@ -74,7 +74,6 @@ def modify_reference_route(reference_id):
         return render_template("modify_reference.html", reference=jsondata, r = reference)
     if request.method == "POST":
         all_fields = request.form.to_dict()
-        print("All fields received:", all_fields)
         try:
             validate_reference(all_fields["reference_type"], all_fields)
 
