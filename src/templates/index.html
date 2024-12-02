@@ -38,21 +38,13 @@ block head %} {{ super() }}
             <td><span class="td-content">{{ reference.fields.get(field, '') }}</span></td>
             {% endfor %}
             <td>
-              <form
-              action="/delete_reference/{{ reference.reference_id }}"
-              method="post"
-              style="display: inline"
-              onsubmit="return confirmDeletion();"
-              >
+              <form action="/delete_reference/{{ reference.reference_id }}" method="post" style="display: inline"
+                onsubmit="return confirmDeletion();">
                 <button type="submit" class="button delete">Delete</button>
               </form>
             </td>
             <td>
-              <form
-                action="/modify_reference/{{ reference.reference_id }}"
-                method="get"
-                style="display: inline"
-              >
+              <form action="/modify_reference/{{ reference.reference_id }}" method="get" style="display: inline">
                 <button type="submit" class="button">Modify</button>
               </form>
             </td>
@@ -134,7 +126,7 @@ block head %} {{ super() }}
       for (let i = 0; i < header.length; i++) {
         props.push({
           header: header[i].innerHTML,
-          content: [...row.cells][i].innerHTML,
+          content: [...row.cells][i].textContent,
         });
       }
       refs.push(
