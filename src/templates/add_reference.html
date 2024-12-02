@@ -280,6 +280,7 @@ if messages %}
   if ("{{fetch_data}}") {
     const string2 = "{{fetch_data}}".replace(/&#34;/g, '"').replace(/False/g, "false").replace(/True/g, "true");
     const data = JSON.parse(string2);
+    document.getElementById("doi_fetch").value = data.DOI;
     if (data.type.endsWith("-article")) {
       document.getElementById("type").value = "article";
       updateFormFields();
