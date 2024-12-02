@@ -11,22 +11,29 @@ mappings = {
 
 def fetch_work(doi):
     work = works.doi(doi)
-    if work["author"]:
+    #ARTICLE
+    if "author" in work:
         work["author"] = fix_names(work["author"])
-    if work["container-title"][0]:
+    if "container-title" in work and len(work["container-title"]) != 0:
         work["journal"] = work["container-title"][0]
-    if work["published-print"]:
+    if "published-print" in work:
         work["year"] = work["published"]["date-parts"][0][0]
         work["month"] = work["published"]["date-parts"][0][1]
-    if work["published"]:
+    if "published" in work:
         work["year"] = work["published-print"]["date-parts"][0][0]
         work["month"] = work["published-print"]["date-parts"][0][1]
-    if work["title"][0]:
+    if "title" in work:
         work["title"] = work["title"][0]
-    if work["journal-issue"]["issue"]:
+    if "issue" in work:  
         work["number"] = work["journal-issue"]["issue"]
-    if work["page"]:    
+    if "page" in work:    
         work["pages"] = work["page"]
+    #BOOK
+    if "editor" in work:
+        work["editor"] = fix_names(work["editor"])
+    if work["type"] == "monograph":
+        work["editor"] = work["author"]
+    
         
     return work
 
@@ -39,5 +46,7 @@ def fix_names(authors):
     return new_author
 
 
-if __name__ == "__main__":
-    print(fetch_work("10.1109/MSPEC.2016.7439593"))
+#if __name__ == "__main__":
+    #print(fetch_work("10.1145/3603178"))
+    #print(fetch_work("10.1145/3617291"))
+    #print(fetch_work("10.1145/3548732"))
