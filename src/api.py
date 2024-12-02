@@ -24,17 +24,16 @@ def fetch_work(doi):
         work["month"] = work["published-print"]["date-parts"][0][1]
     if "title" in work:
         work["title"] = work["title"][0]
-    if "issue" in work:  
+    if "issue" in work:
         work["number"] = work["journal-issue"]["issue"]
-    if "page" in work:    
+    if "page" in work:
         work["pages"] = work["page"]
     #BOOK
     if "editor" in work:
         work["editor"] = fix_names(work["editor"])
     if work["type"] == "monograph":
         work["editor"] = work["author"]
-    
-        
+
     return work
 
 def fix_names(authors):
