@@ -45,7 +45,6 @@ def add_reference():
 def fetch_reference():
     data = fetch_work(request.form.to_dict()["doi_fetch"])
     jsondata = re.escape(json.dumps(data))
-    print(jsondata)
     return render_template("add_reference.html", fetch_data=jsondata)
 
 
