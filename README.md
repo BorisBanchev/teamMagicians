@@ -1,18 +1,21 @@
 # TeamMagician
 
 [![CI badge](https://github.com/BorisBanchev/teamMagicians/workflows/CI/badge.svg)](https://github.com/BorisBanchev/teamMagicians/actions)
+[![codecov](https://codecov.io/gh/BorisBanchev/teamMagicians/graph/badge.svg?token=X6M0LZ9ZYP)](https://codecov.io/gh/BorisBanchev/teamMagicians)
 
 [Team Product and Sprint Backlog](https://docs.google.com/spreadsheets/d/1M6PnnOBQbmud6kSEFh_Pxoa-kk0jIUnGVv0p_7QD7ms/edit?usp=sharing)
 
-### Definition of done: ###
-- Kaikki kyseiseen user storyyn liittyvät hyväksymiskriteerit on täytetty 
+### Definition of done:
+
+- Kaikki kyseiseen user storyyn liittyvät hyväksymiskriteerit on täytetty
 - Käyttäjälle näytetään selkeät ja ymmärrettävät virheviestit kaikissa tyypillisimmissä virhetilanteissa.
 - Virheviestit vastaavat käyttäjän toimintaa ja ohjaavat käyttäjää korjaamaan ongelman.
 - Unit testit ja end-to-end-testit on kirjoitettu ja ne suoritetaan onnistuneesti.
 - Testit on automatisoitu.
 - README.md sisältää kaikki tarvittavat tiedot ohjelmiston ajamiseen ja käyttöönottoon, kuten:
-    - Ohjeet ympäristön asennukseen ja konfigurointiin.
-    - Mahdolliset ulkoiset riippuvuudet ja miten ne asentaa.
+  - Ohjeet ympäristön asennukseen ja konfigurointiin.
+  - Mahdolliset ulkoiset riippuvuudet ja miten ne asentaa.
+
 ## Käynnistysohjeet
 
 Kloonaa repositorio omalle koneellesi

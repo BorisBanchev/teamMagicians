@@ -35,15 +35,16 @@ block head %} {{ super() }}
           {% for reference in references %}
           <tr class="reference_row">
             {% for field in all_fields %}
-            <td>{{ reference.fields.get(field, '') }}</td>
+            <td><span class="td-content">{{ reference.fields.get(field, '') }}</span></td>
             {% endfor %}
             <td>
               <form
-                action="/delete_reference/{{ reference.reference_id }}"
-                method="post"
-                style="display: inline"
+              action="/delete_reference/{{ reference.reference_id }}"
+              method="post"
+              style="display: inline"
+              onsubmit="return confirmDeletion();"
               >
-                <button type="submit" class="button">Delete</button>
+                <button type="submit" class="button delete">Delete</button>
               </form>
             </td>
           </tr>
@@ -144,5 +145,10 @@ block head %} {{ super() }}
     link.click();
     URL.revokeObjectURL(link.href);
   };
+</script>
+<script>
+  function confirmDeletion() {
+    return confirm("Are you sure you want to delete this reference?");
+  }
 </script>
 {% endblock %}
