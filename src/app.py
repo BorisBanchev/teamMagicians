@@ -43,7 +43,10 @@ def add_reference():
 
 @app.route("/fetch_reference", methods=["POST"])
 def fetch_reference():
-    data = fetch_work(request.form.to_dict()["doi_fetch"])
+    doi_input = request.form.to_dict()["doi_fetch"]
+    doi = re.search(r'10\.\d{4}\/.*$', doi_input).group()
+    print(doi)
+    data = fetch_work(doi)
     jsondata = re.escape(json.dumps(data))
     return render_template("add_reference.html", fetch_data=jsondata)
 
