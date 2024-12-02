@@ -24,6 +24,10 @@ def get_references():
 
     return references
 
+def get_reference(reference_id):
+    sql = text("SELECT * FROM reference_list WHERE id=:id")
+    reference = db.session.execute(sql, {"id":reference_id}).fetchone()
+    return reference
 
 def create_reference(fields):
     columns = ", ".join(fields.keys())  # Field names
@@ -34,12 +38,16 @@ def create_reference(fields):
     db.session.execute(sql, fields)
     db.session.commit()
 
+def modify_reference(reference_id, all_fields):
+    values = ", ".join(f"{key} = :{key}" for key in all_fields.keys())
+    sql = text(f"UPDATE reference_list SET {values} WHERE id = {reference_id}")
+    db.session.execute(sql, all_fields)
+    db.session.commit()
 
 def delete_reference(reference_id):
     sql = text("DELETE FROM reference_list WHERE id = :id")
     db.session.execute(sql, {"id": reference_id})
     db.session.commit()
-
 
 def check_valid_keyword(keyword):
     sql = text("SELECT keyword FROM reference_list")
