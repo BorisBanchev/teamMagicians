@@ -71,7 +71,7 @@ def modify_reference_route(reference_id):
     if request.method == "GET":
         reference = get_reference(reference_id)
         jsondata = re.escape(json.dumps(reference._asdict()))
-        return render_template("modify_reference.html", reference=jsondata)
+        return render_template("modify_reference.html", reference=jsondata, r = reference)
     if request.method == "POST":
         all_fields = request.form.to_dict()
         print("All fields received:", all_fields)
@@ -82,7 +82,7 @@ def modify_reference_route(reference_id):
             return redirect("/")
         except ValueError as error:
             flash(str(error))
-            return redirect("/modify_reference")
+            return redirect("/modify_reference/<int:reference_id>")
     return None
 
 # testausta varten oleva reitti

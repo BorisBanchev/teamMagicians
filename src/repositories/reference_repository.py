@@ -39,11 +39,9 @@ def create_reference(fields):
     db.session.commit()
 
 def modify_reference(reference_id, all_fields):
-    columns = ", ".join(all_fields.keys())
-    values = ", ".join(f":{key}" for key in all_fields.keys())
-
-    sql = text(f"UPDATE reference_list SET ({columns}) VALUES ({values}) WHERE id = {reference_id}")
-    db.session.execute(sql)
+    values = ", ".join(f"{key} = :{key}" for key in all_fields.keys())
+    sql = text(f"UPDATE reference_list SET {values} WHERE id = {reference_id}")
+    db.session.execute(sql, all_fields)
     db.session.commit()
 
 def delete_reference(reference_id):
