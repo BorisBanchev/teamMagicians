@@ -12,14 +12,14 @@
   
 
 
-  <form id="reference-form2" action="/modify_reference" method="POST" onsubmit="return check(this)">
+  <form id="modify-form" action="/modify_reference/{{r.id}}" method="POST" onsubmit="return check(this)">
     <div class="frame">
       <div class="info">
         <h2>Add Reference:</h2>
       </div>
       <div class="row">
         <label for="type" id="type_label">Reference Type: </label>
-        <input type="hidden" value="" id="type" name="reference_type">
+        <input type="hidden" value="" id="reference_type" name="reference_type">
       </div>
       <div class="row" id="form-fields"></div>
       <div class="row footer">
@@ -190,7 +190,7 @@
       },
     };
     const updateFormFields = () => {
-      const type = document.getElementById("type").value;
+      const type = document.getElementById("reference_type").value;
       const fields = referenceFields[type];
       const formFieldsDiv = document.getElementById("form-fields");
       formFieldsDiv.innerHTML = "";
@@ -244,7 +244,7 @@
 
     const ref_string = "{{reference}}".replace(/&#34;/g, '"').replace(/False/g, "false").replace(/True/g, "true");
     const data = JSON.parse(ref_string);
-    document.getElementById("type").value = data.reference_type;
+    document.getElementById("reference_type").value = data.reference_type;
     document.getElementById("type_label").innerHTML = `Reference Type: ${data.reference_type}`;
     updateFormFields();
   </script>
