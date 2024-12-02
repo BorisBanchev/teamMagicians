@@ -26,12 +26,7 @@ if messages %}
   <form id="reference-form" action="/add_reference" method="POST" onsubmit="return check(this)">
     <div class="row">
       <label for="type">Reference Type:</label>
-      <select
-        id="type"
-        name="reference_type"
-        onchange="updateFormFields()"
-        required
-      >
+      <select id="type" name="reference_type" onchange="updateFormFields()" required>
         <option value="" disabled selected>Select</option>
         <option value="article">Article</option>
         <option value="book">Book</option>
@@ -51,19 +46,10 @@ if messages %}
     </div>
     <div class="row" id="form-fields"></div>
     <div class="button-container">
-      <button
-        style="margin-right: 8px; border: none"
-        class="button"
-        type="submit"
-      >
+      <button style="margin-right: 8px; border: none" class="button" type="submit">
         Save Reference
       </button>
-      <button
-        style="border: none"
-        class="button"
-        type="button"
-        onclick="window.location.href='/'"
-      >
+      <button style="border: none" class="button" type="button" onclick="window.location.href='/'">
         Cancel
       </button>
     </div>
