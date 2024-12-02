@@ -70,8 +70,8 @@ def delete_reference_route(reference_id):
 def modify_reference_route(reference_id):
     if request.method == "GET":
         reference = get_reference(reference_id)
-        print(f"Reference with reference_id {reference_id} is {reference}")
-        return render_template("modify_reference.html", reference=reference)
+        jsondata = re.escape(json.dumps(reference._asdict()))
+        return render_template("modify_reference.html", reference=jsondata)
     if request.method == "POST":
         all_fields = request.form.to_dict()
         print("All fields received:", all_fields)

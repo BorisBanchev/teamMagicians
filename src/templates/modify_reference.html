@@ -18,9 +18,8 @@
         <h2>Add Reference:</h2>
       </div>
       <div class="row">
-        <label for="type">Reference Type: </label>
-        {{reference.reference_type}}
-        <input type = "hidden" value= {{reference.reference_type}} id="type" name="reference_type">
+        <label for="type" id="type_label">Reference Type: </label>
+        <input type="hidden" value="" id="type" name="reference_type">
       </div>
       <div class="row" id="form-fields"></div>
       <div class="row footer">
@@ -58,7 +57,6 @@
         return false;
       }
     }
-    console.log(type);
     const referenceFields = {
       article: {
         mandatory: ["author", "title", "journal", "year"],
@@ -235,8 +233,7 @@
   
       const input = document.createElement("input");
       input.type = "text";
-      const value = "reference.field".replace("field", field);
-      input.value = value;
+      input.value = data[field];
       input.name = field;
       input.id = field;
       input.required = required;
@@ -245,6 +242,10 @@
       return row;
     };
 
+    const ref_string = "{{reference}}".replace(/&#34;/g, '"').replace(/False/g, "false").replace(/True/g, "true");
+    const data = JSON.parse(ref_string);
+    document.getElementById("type").value = data.reference_type;
+    document.getElementById("type_label").innerHTML = `Reference Type: ${data.reference_type}`;
     updateFormFields();
   </script>
   {% endblock %}
