@@ -3,6 +3,8 @@
   --white: #fff;
   --invoice-bg: #e7e7e9;
   --primary-clr: #2f2929;
+  --red: #ffc2c2;
+  --red-hover: #fb9d9d;
 }
 
 * {
@@ -57,15 +59,10 @@ input {
   font-size: 14px;
 }
 
-/* form input[type="submit"],
-button {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 500;
-  margin-right: 2em;
-  padding: 0.5em 1em;
-  border-radius: 0.5em;
-} */
+.button-container {
+  display: flex;
+  gap: 8px;
+}
 
 .button {
   background-color: var(--invoice-bg);
@@ -73,10 +70,19 @@ button {
   border-radius: 2px;
   cursor: pointer;
   color: black;
+  border: none;
+}
+
+.button.delete {
+  background-color: var(--red);
 }
 
 .button:hover {
   background-color: var(--bg-clr);
+}
+
+.button.delete:hover {
+  background-color: var(--red-hover);
 }
 
 a {
