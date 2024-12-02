@@ -1,4 +1,5 @@
 import json
+import re
 from flask import redirect, render_template, request, jsonify, flash
 from config import app, test_env
 from db_helper import reset_db
@@ -43,8 +44,9 @@ def add_reference():
 @app.route("/fetch_reference", methods=["POST"])
 def fetch_reference():
     data = fetch_work(request.form.to_dict()["doi_fetch"])
-    print(data)
-    return render_template("add_reference.html", fetch_data=json.dumps(data))
+    jsondata = re.escape(json.dumps(data))
+    print(jsondata)
+    return render_template("add_reference.html", fetch_data=jsondata)
 
 
 @app.route("/delete_reference/<int:reference_id>", methods=["POST"])
