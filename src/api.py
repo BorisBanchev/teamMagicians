@@ -43,9 +43,3 @@ def fix_names(authors):
         family = author["family"]
         new_author.append(f"{family}, {given}")
     return new_author
-
-
-#if __name__ == "__main__":
-    #print(fetch_work("10.1145/3603178"))
-    #print(fetch_work("10.1145/3617291"))
-    #print(fetch_work("10.1145/3548732"))
