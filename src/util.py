@@ -1,6 +1,3 @@
-from sqlalchemy import text
-from config import db
-
 class UserInputError(Exception):
     pass
 
@@ -65,7 +62,7 @@ def validate_reference(reference_type, fields):
     rules = {
         "keyword": (0, 20, "Reference keyword length can't be greater than 20"),
         "address": (3, 100, "Reference address length must be between 3 and 100"),
-        "author": (3, 100, "Reference author length must be between 3 and 100"),
+        "author": (3, 1000, "Reference author length must be between 3 and 1000"),
         "booktitle": (3, 100, "Reference booktitle length must be between 3 and 100"),
         "howpublished": (3, 100, "Reference howpublished length must be between 3 and 100"),
         "institution": (3, 100, "Reference institution length must be between 3 and 100"),
@@ -91,10 +88,7 @@ def validate_reference(reference_type, fields):
 def check_input_length(field, min_length):
     return len(field) > 0 and len(field) < min_length
 
-def check_valid_keyword(keyword):
-    sql = text("SELECT keyword FROM reference_list")
-    keywords = db.session.execute(sql).fetchall()
-    list_keywords = [keyword[0] for keyword in keywords]
+def check_valid_keyword(keyword, list_keywords):
     if keyword in list_keywords:
         raise  ValueError("Reference keyword must be unique")
 

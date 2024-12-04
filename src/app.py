@@ -8,7 +8,8 @@ from repositories.reference_repository import (
     get_references,
     delete_reference,
     get_reference,
-    modify_reference
+    modify_reference,
+    get_keywords
 )
 from util import validate_reference, check_valid_keyword
 from api import fetch_work
@@ -36,8 +37,7 @@ def add_reference():
 
     # Retrieve all fields submitted by the user
         try:
-            check_valid_keyword(all_fields["keyword"])
-            # Dynamic validation
+            check_valid_keyword(all_fields["keyword"], get_keywords())
             validate_reference(all_fields["reference_type"], all_fields)
 
             create_reference(all_fields)
