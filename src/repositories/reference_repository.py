@@ -29,6 +29,12 @@ def get_reference(reference_id):
     reference = db.session.execute(sql, {"id":reference_id}).fetchone()
     return reference
 
+def get_keywords():
+    sql = text("SELECT keyword FROM reference_list")
+    keywords = db.session.execute(sql).fetchall()
+    list_keywords = [keyword[0] for keyword in keywords]
+    return list_keywords
+
 def create_reference(fields):
     columns = ", ".join(fields.keys())  # Field names
     # Parameter placeholders
