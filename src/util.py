@@ -1,6 +1,3 @@
-from sqlalchemy import text
-from config import db
-
 class UserInputError(Exception):
     pass
 
