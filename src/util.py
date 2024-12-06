@@ -1,42 +1,43 @@
 class UserInputError(Exception):
     pass
 
-def validate_reference(reference_type, fields):
-    reference_fields = {
-        "article": {"mandatory": ["author", "title", "journal", "year"],
-                    "optional": ["volume", "number", "pages", "month", "note"]},
-        "book": {"mandatory": ["author", "title", "publisher", "year"],
-                 "optional": ["editor", "volume", "number", "series", "edition", "isbn"]},
-        "misc": {"mandatory": [],
-                 "optional": ["author", "title", "howpublished", "month", "year", "note"]},
-        "inproceedings": {"mandatory": ["author", "title", "booktitle", "year"],
-                          "optional": ["editor", "volume", "number", "series", "pages",
-                                       "address", "month", "organization", "publisher"]},
-        "booklet": {"mandatory": ["author", "title", "howpublished", "year", "address"],
-                    "optional": ["editor", "volume", "number", "series",
-                                 "organization", "month", "note"]},
-        "conference": {"mandatory": ["author", "title", "booktitle", "year"],
-                       "optional": ["editor", "volume", "number", "series", "pages",
-                                    "address", "month", "organization", "publisher", "note"]},
-        "inbook": {"mandatory": ["author", "title", "booktitle", "publisher", "year"],
-                   "optional": ["editor", "volume", "number", "series", "address", "edition",
-                                "month", "pages", "note"]},
-        "incollection": {"mandatory": ["author", "title", "booktitle", "publisher", "year"],
-                         "optional": ["editor", "volume", "number", "series", "pages", "address", "month"]},
-        "manual": {"mandatory": ["title", "year"],
-                   "optional": ["author", "organization", "address", "edition", "month", "note"]},
-        "mastersthesis": {"mandatory": ["author", "title", "school", "year"],
-                          "optional": ["type", "address", "month", "note"]},
-        "phdthesis": {"mandatory": ["author", "title", "school", "year"],
-                      "optional": ["type", "address", "month", "note"]},
-        "proceedings": {"mandatory": ["title", "year"],
-                        "optional": ["editor", "volume", "number", "series", "address", "month", "publisher"]},
-        "techreport": {"mandatory": ["author", "title", "institution", "year"],
-                       "optional": ["type", "number", "address", "month", "note"]},
-        "unpublished": {"mandatory": ["author", "title", "note"],
-                        "optional": ["month", "year"]}
-    }
+reference_fields = {
+    "article": {"mandatory": ["author", "title", "journal", "year"],
+                "optional": ["volume", "number", "pages", "month", "note"]},
+    "book": {"mandatory": ["author", "title", "publisher", "year"],
+                "optional": ["editor", "volume", "number", "series", "edition", "isbn"]},
+    "misc": {"mandatory": [],
+                "optional": ["author", "title", "howpublished", "month", "year", "note"]},
+    "inproceedings": {"mandatory": ["author", "title", "booktitle", "year"],
+                        "optional": ["editor", "volume", "number", "series", "pages",
+                                    "address", "month", "organization", "publisher"]},
+    "booklet": {"mandatory": ["author", "title", "howpublished", "year", "address"],
+                "optional": ["editor", "volume", "number", "series",
+                                "organization", "month", "note"]},
+    "conference": {"mandatory": ["author", "title", "booktitle", "year"],
+                    "optional": ["editor", "volume", "number", "series", "pages",
+                                "address", "month", "organization", "publisher", "note"]},
+    "inbook": {"mandatory": ["author", "title", "booktitle", "publisher", "year"],
+                "optional": ["editor", "volume", "number", "series", "address", "edition",
+                            "month", "pages", "note"]},
+    "incollection": {"mandatory": ["author", "title", "booktitle", "publisher", "year"],
+                        "optional": ["editor", "volume", "number", "series", "pages", "address", "month"]},
+    "manual": {"mandatory": ["title", "year"],
+                "optional": ["author", "organization", "address", "edition", "month", "note"]},
+    "mastersthesis": {"mandatory": ["author", "title", "school", "year"],
+                        "optional": ["type", "address", "month", "note"]},
+    "phdthesis": {"mandatory": ["author", "title", "school", "year"],
+                    "optional": ["type", "address", "month", "note"]},
+    "proceedings": {"mandatory": ["title", "year"],
+                    "optional": ["editor", "volume", "number", "series", "address", "month", "publisher"]},
+    "techreport": {"mandatory": ["author", "title", "institution", "year"],
+                    "optional": ["type", "number", "address", "month", "note"]},
+    "unpublished": {"mandatory": ["author", "title", "note"],
+                    "optional": ["month", "year"]}
+}
 
+
+def validate_reference(reference_type, fields):
     if not fields["keyword"]:
         raise ValueError("Keyword is a mandatory field")
 
