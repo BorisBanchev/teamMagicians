@@ -8,7 +8,7 @@ ${HOME_URL}   http://${SERVER}
 ${RESET_URL}  http://${SERVER}/reset_db
 ${BROWSER}    chrome
 ${HEADLESS}   false
-
+${OUTPUT_DIR}  /tmp/downloads
 *** Keywords ***
 Open And Configure Browser
     IF  $BROWSER == 'chrome'
@@ -22,7 +22,9 @@ Open And Configure Browser
     ELSE
         Set Selenium Speed  ${DELAY}
     END
-    Open Browser  browser=${BROWSER}  options=${options}
+    ${prefs}=  Create Dictionary  download.default_directory=${OUTPUT_DIR}
+    Call Method  ${options}  add_experimental_option  prefs  ${prefs}
+    Open Browser  ${HOME_URL}  ${browser}  options=${options}
 
 Reset Todos
     Go To  ${RESET_URL}

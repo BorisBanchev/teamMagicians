@@ -12,7 +12,7 @@ Download BibTeX File
 
 *** Keywords ***
 Add Reference
-    [Documentation]  
+    [Documentation]    Add a reference to the system
     Click Link  //a[contains(text(), "Add Reference")]
     Select From List By Label  reference_type  Article
     Input Text  author  Example1
@@ -21,17 +21,17 @@ Add Reference
     Input Text  year  2000
     Input Text  keyword  article
     Click Button  Save Reference
-    Sleep  1s  
+    Sleep  1s  # Wait for the reference to be added and redirected to the home page
     Page Should Contain  Example1
     Page Should Contain  Example2
     Page Should Contain  Example3
     Page Should Contain  2000
 Render BibTeX And Download File
-    [Documentation] 
+    [Documentation]    Render BibTeX and download the file
     Click Link  Render BibTeX
-    Sleep  5s 
+    Sleep  5s  # Wait for the BibTeX to be rendered
     Click Button  Download BibTeX file
-    Sleep  10s  
+    Sleep  10s  # Wait for the download to complete
     ${downloaded_file}  Run Keyword And Return Status  File Should Exist  ${OUTPUT_DIR}/references.bib
     Log  Downloaded file exists: ${downloaded_file}
     Should Be True  ${downloaded_file}
