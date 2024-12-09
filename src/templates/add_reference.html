@@ -11,20 +11,18 @@ if messages %}
 {% endif %} {% endwith %}
 
 <div class="frame">
-  <div class="info">
-    <h2>Add Reference:</h2>
+  <div class="title-bar">
+    <h2>Add reference</h2>
+    <div class="search-bar">
+      <form id="reference-fetch-form" action="/fetch_reference" method="POST">
+        <input type="text" id="doi_fetch" name="doi_fetch" placeholder="Enter DOI" oninput="filterTable()" />
+        <input type="submit" class="button" value="Fetch Reference" />
+      </form>
+    </div>
   </div>
 
-  <form id="reference-fetch-form" action="/fetch_reference" method="POST">
-    <div class="row">
-      <label for="doi_fetch">Fetch by DOI:</label>
-      <input id="doi_fetch" type="text" name="doi_fetch">
-      <input type="submit" value="Fetch Reference" />
-    </div>
-  </form>
-
   <form id="reference-form" action="/add_reference" method="POST" onsubmit="return check(this)">
-    <div class="row">
+    <div class="row type-row">
       <label for="type">Reference Type:</label>
       <select id="type" name="reference_type" onchange="updateFormFields()" required>
         <option value="" disabled selected>Select</option>
@@ -44,7 +42,7 @@ if messages %}
         <option value="unpublished">Unpublished</option>
       </select>
     </div>
-    <div class="row" id="form-fields"></div>
+    <div id="form-fields"></div>
     <div class="button-container">
       <button style="margin-right: 8px; border: none" class="button" type="submit">
         Save Reference
