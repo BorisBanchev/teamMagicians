@@ -42,10 +42,10 @@ block head %} {{ super() }}
             <td>
               <form action="/delete_reference/{{ reference.reference_id }}" method="post" style="display: inline"
                 onsubmit="return confirmDeletion();">
-                <button type="submit" class="button delete"><i class="fa-solid fa-trash-can"></i></button>
+                <button type="submit" class="button delete" id="delete"><i class="fa-solid fa-trash-can"></i></button>
               </form>
               <form action="/modify_reference/{{ reference.reference_id }}" method="get" style="display: inline">
-                <button type="submit" class="button"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button type="submit" class="button" id="modify"><i class="fa-solid fa-pen-to-square"></i></button>
               </form>
             </td>
             {% for field in all_fields %}
