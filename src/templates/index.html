@@ -1,6 +1,7 @@
 {% extends "layout.html" %} {% block title %}Reference App{% endblock %} {%
 block head %} {{ super() }}
 <link rel="stylesheet" href="/static/styles.css" />
+<script src="https://kit.fontawesome.com/3f04b9f9c1.js" crossorigin="anonymous"></script>
 {% endblock %} {% block body %}
 <div class="frames">
   <div class="frame">
@@ -12,15 +13,17 @@ block head %} {{ super() }}
     </ul>
     {% endif %} {% endwith %}
 
-    <div class="info">
+    <div class="title-bar">
       <h2>References</h2>
+      <div class="search-bar">
+        <!-- <label style="padding-right: 8px" for="searchbox" class="search-label">Search References:</label> -->
+        <input type="text" id="searchbox" placeholder="Search references..." oninput="filterTable()" />
+      </div>
     </div>
 
     {% if references | length > 0 %}
     <div class="header-container">
       <p>Added references:</p>
-      <label style="padding-right: 8px" for="searchbox" class="search-label">Filter References:</label>
-      <input style="margin-left: 8px" type="text" id="searchbox" oninput="filterTable()" />
     </div>
 
     <div class="table-container">
@@ -39,10 +42,10 @@ block head %} {{ super() }}
             <td>
               <form action="/delete_reference/{{ reference.reference_id }}" method="post" style="display: inline"
                 onsubmit="return confirmDeletion();">
-                <button type="submit" class="button delete">Delete</button>
+                <button type="submit" class="button delete" id="delete"><i class="fa-solid fa-trash-can"></i></button>
               </form>
               <form action="/modify_reference/{{ reference.reference_id }}" method="get" style="display: inline">
-                <button type="submit" class="button">Modify</button>
+                <button type="submit" class="button" id="modify"><i class="fa-solid fa-pen-to-square"></i></button>
               </form>
             </td>
             {% for field in all_fields %}
