@@ -84,7 +84,7 @@ def modify_reference_route(reference_id):
             return redirect("/modify_reference/<int:reference_id>")
     return None
 
-# testausta varten oleva reitti
+# route for testing
 if test_env:
     @app.route("/reset_db")
     def reset_database():
