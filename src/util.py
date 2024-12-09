@@ -59,7 +59,7 @@ def validate_reference(reference_type, fields):
     if not provided_fields:
         raise ValueError("At least one field needs to be maintained.")
 
-    rules = {
+    field_rules = {
         "keyword": (0, 20, "Reference keyword length can't be greater than 20"),
         "address": (3, 100, "Reference address length must be between 3 and 100"),
         "author": (3, 1000, "Reference author length must be between 3 and 1000"),
@@ -73,7 +73,7 @@ def validate_reference(reference_type, fields):
         "title": (3, 100, "Reference title length must be between 3 and 100")
     }
 
-    for field, constraint in rules.items():
+    for field, constraint in field_rules.items():
         if field in fields:
             min_length, max_length, error_message = constraint
             if check_input_length(fields[field], min_length) or len(fields[field]) > max_length:
