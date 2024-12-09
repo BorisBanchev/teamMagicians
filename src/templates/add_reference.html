@@ -64,7 +64,7 @@ if messages %}
     const data = JSON.parse(string2);
     document.getElementById("doi_fetch").value = data.DOI;
     if (data.type.endsWith("-article")) {
-      document.getElementById("type").value = "article";
+      document.getElementById("reference_type").value = "article";
       updateFormFields();
       for (const field of referenceFields["article"].mandatory) {
         if (field == "author") document.getElementById(field).value = data[field].join(" and ");
