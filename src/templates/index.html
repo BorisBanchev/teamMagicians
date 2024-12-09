@@ -117,7 +117,11 @@ block head %} {{ super() }}
     const formatted = refs.map((ref) => {
       const type = get_prop(ref, "Reference_type");
       return `@${type}{${get_prop(ref, "Keyword")},\n${ref
-        .filter((r) => !["Reference_type", "Keyword"].includes(r.header))
+        .filter(
+          (r) =>
+            !["Reference_type", "Keyword"].includes(r.header) &&
+            r.content.trim() !== ""
+        )
         .map((r) => `    ${r.header.toLowerCase()} = "${r.content}"`)
         .join(",\n")}\n}`;
     });
@@ -143,6 +147,7 @@ block head %} {{ super() }}
     const header = [...table.rows[0].cells];
     const refs = [];
     for (const row of [...table.rows].slice(1)) {
+      if (row.style.display === "none") continue;
       const props = [];
       for (let i = 0; i < header.length; i++) {
         props.push({
