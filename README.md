@@ -1,5 +1,7 @@
 # TeamMagician
 
+
+
 [![CI badge](https://github.com/BorisBanchev/teamMagicians/workflows/CI/badge.svg)](https://github.com/BorisBanchev/teamMagicians/actions)
 [![codecov](https://codecov.io/gh/BorisBanchev/teamMagicians/graph/badge.svg?token=X6M0LZ9ZYP)](https://codecov.io/gh/BorisBanchev/teamMagicians)
 
