@@ -14,6 +14,6 @@ After fetching by DOI succesfully, there is a reference
     Click Button  Fetch Reference
     Input Text  keyword  doitest
     Click Button  Save Reference
-    Wait Until Page Contains  doitest
+    Wait Until Page Contains  doitest  timeout=10s
     Wait Until Page Contains  Canet Sola
     Wait Until Page Contains  Visions of Destruction
