@@ -5,6 +5,8 @@
 
 [Team Product and Sprint Backlog](https://docs.google.com/spreadsheets/d/1M6PnnOBQbmud6kSEFh_Pxoa-kk0jIUnGVv0p_7QD7ms/edit?usp=sharing)
 
+[Team Final Report](https://helsinkifi-my.sharepoint.com/:b:/g/personal/salonout_ad_helsinki_fi/EcdWpF843NBEpZ-yjOzeYdYBHy-dw5LMxOwnT9deOyCn1w?e=eLDw4Z)
+
 ### Definition of done:
 
 - Kaikki kyseiseen user storyyn liittyvät hyväksymiskriteerit on täytetty
