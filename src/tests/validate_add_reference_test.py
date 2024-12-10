@@ -1,5 +1,5 @@
 import unittest
-from util import validate_reference, check_valid_keyword, UserInputError
+from util import validate_reference, check_valid_keyword, UserInputError, raise_error
 
 class TestReferenceValidation(unittest.TestCase):
     def setUp(self):
@@ -54,3 +54,7 @@ class TestReferenceValidation(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_reference(
                 "article", {"author": "test", "title": "test", "journal": "test", "year": "2025", "keyword": "K1236"})
+            
+    def test_raise_error_raises_error(self):
+        with self.assertRaises(ValueError):
+            raise_error("message")
