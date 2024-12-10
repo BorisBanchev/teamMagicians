@@ -79,11 +79,10 @@ def validate_reference(reference_type, fields):
             if check_input_length(fields[field], min_length) or len(fields[field]) > max_length:
                 raise ValueError(error_message)
 
-    if "year" in fields:  # Check if year exists and is not empty
-        if fields["year"] == "":
-            pass
-        elif int(fields["year"]) < 0 or int(fields["year"]) > 2024:  # Check range
-            raise ValueError("Reference year must be positive and smaller than 2025")
+    if fields["year"] == "":
+        pass
+    elif int(fields["year"]) < 0 or int(fields["year"]) > 2024:  # Check range
+        raise ValueError("Reference year must be positive and smaller than 2025")
 
 def check_input_length(field, min_length):
     return len(field) > 0 and len(field) < min_length
