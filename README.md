@@ -5,7 +5,7 @@
 
 [Team Product and Sprint Backlog](https://docs.google.com/spreadsheets/d/1M6PnnOBQbmud6kSEFh_Pxoa-kk0jIUnGVv0p_7QD7ms/edit?usp=sharing)
 
-[Team Final Report](https://helsinkifi-my.sharepoint.com/:b:/g/personal/salonout_ad_helsinki_fi/EcdWpF843NBEpZ-yjOzeYdYBlMcKy2VIqQcwtmmighup0A)
+[Team Final Report](https://helsinkifi-my.sharepoint.com/:b:/g/personal/salonout_ad_helsinki_fi/EcdWpF843NBEpZ-yjOzeYdYBlMcKy2VIqQcwtmmighup0A?e=XeX28m)
 
 ### Definition of done:
 
