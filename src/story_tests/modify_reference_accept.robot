@@ -17,6 +17,7 @@ Modify Added Reference
 Start Modifying Reference and Then Cancel Changes
     Add Reference    Example1    Example2    Exaple3    2000    article1
     Click Button  id=modify
+    Wait Until Element Is Visible  journal  timeout=5s
     Input Text  journal  Example3
     Click Button  Cancel
     Page Should Contain  Exaple3
@@ -24,6 +25,7 @@ Start Modifying Reference and Then Cancel Changes
 Receive Alert When Saving Changes With a Future Year
     Add Reference    Example1    Example2    Example3    2000    article1
     Click Button  id=modify
+    Wait Until Element Is Visible  year  timeout=5s
     Input Text  year  2050
     Click Button  Save Changes
     Alert Should Be Present  Reference year must be positive and smaller than 2025
